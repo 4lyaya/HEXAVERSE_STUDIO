@@ -3,590 +3,606 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HEXAVERSE STUDIO — Digital Innovation Architects</title>
+  <title>HEXAVERSE STUDIO — Architecting Multi-Dimensional Solutions</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ─── TOKENS ─────────────────────────────────────────────────── */
+    /* ─── TOKENS ────────────────────────────────────────────────── */
     :root {
-      --purple:       #6D28D9;
-      --purple-mid:   #7C3AED;
-      --purple-light: #8B5CF6;
-      --purple-muted: #4C1D95;
+      /* Purple */
+      --p1: #3B0F7A;
+      --p2: #5B21B6;
+      --p3: #7C3AED;
+      --p4: #9F67F5;
+      --p5: #C4B5FD;
+      /* Blue */
+      --b1: #1E3A5F;
+      --b2: #1E4E8C;
+      --b3: #2563EB;
+      --b4: #60A5FA;
+      --b5: #BAE6FD;
+      /* Grey */
+      --g1: #0D0D14;
+      --g2: #141420;
+      --g3: #1C1C2E;
+      --g4: #26263C;
+      --g5: #3A3A58;
+      --g6: #5C5C82;
+      --g7: #8888AA;
+      --g8: #BBBBCC;
+      --g9: #E8E8F0;
 
-      --bg:           #0A0A0F;
-      --bg-2:         #0F0F1A;
-      --bg-card:      #12121E;
-      --bg-card-h:    #16162B;
-      --border:       rgba(109,40,217,.25);
-      --border-h:     rgba(139,92,246,.5);
-      --text:         #F4F4F8;
-      --text-muted:   #9090A8;
-      --text-dim:     #5A5A72;
+      /* Semantic */
+      --bg:       var(--g1);
+      --bg2:      var(--g2);
+      --bg3:      var(--g3);
+      --card:     var(--g3);
+      --cardh:    var(--g4);
+      --border:   rgba(124,58,237,.2);
+      --borderh:  rgba(159,103,245,.45);
+      --text:     var(--g9);
+      --muted:    var(--g7);
+      --dim:      var(--g6);
 
-      --mono: 'DM Mono', monospace;
-      --sans: 'DM Sans', sans-serif;
-      --display: 'Syne', sans-serif;
+      --accent:   var(--p3);
+      --accentl:  var(--p4);
+      --blue:     var(--b3);
+      --bluel:    var(--b4);
+
+      --display: 'Bebas Neue', sans-serif;
+      --body:    'Outfit', sans-serif;
+      --mono:    'JetBrains Mono', monospace;
 
       --ease: cubic-bezier(.16,1,.3,1);
-      --t: .35s;
+      --t: .32s;
+      --r: 4px;
     }
     [data-theme="light"] {
-      --bg:         #F8F7FF;
-      --bg-2:       #EFECFF;
-      --bg-card:    #FFFFFF;
-      --bg-card-h:  #F3F0FF;
-      --border:     rgba(109,40,217,.18);
-      --border-h:   rgba(109,40,217,.45);
-      --text:       #0F0E1A;
-      --text-muted: #5A5272;
-      --text-dim:   #9D97B5;
+      --bg:    #F0EFFA;
+      --bg2:   #E6E4F7;
+      --bg3:   #DEDCF2;
+      --card:  #FFFFFF;
+      --cardh: #F4F2FF;
+      --border: rgba(92,33,182,.15);
+      --borderh: rgba(124,58,237,.4);
+      --text:  #0D0B1A;
+      --muted: #4A4870;
+      --dim:   #8080A0;
     }
 
-    /* ─── RESET ──────────────────────────────────────────────────── */
+    /* ─── RESET ─────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; }
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--sans);
-      font-weight: 300;
+      font-family: var(--body);
+      font-weight: 400;
       line-height: 1.7;
       transition: background var(--t) var(--ease), color var(--t) var(--ease);
       overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
     button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    img { display: block; max-width: 100%; }
 
-    /* ─── SCROLLBAR ───────────────────────────────────────────────── */
-    ::-webkit-scrollbar { width: 4px; }
+    /* ─── SCROLLBAR ──────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb { background: var(--p3); border-radius: 99px; }
 
-    /* ─── UTILITIES ──────────────────────────────────────────────── */
-    .container { width: 90%; max-width: 1200px; margin: 0 auto; }
-    .mono { font-family: var(--mono); }
-    .tag {
-      display: inline-flex; align-items: center; gap: .5rem;
-      font-family: var(--mono); font-size: .7rem; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--purple-light);
-      padding: .3rem .8rem; border: 1px solid var(--border);
-      border-radius: 2px; background: rgba(109,40,217,.07);
-    }
-    .tag::before { content: '◆'; font-size: .55rem; }
-    .divider {
-      width: 100%; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-      margin: 0;
-    }
+    /* ─── LAYOUT ─────────────────────────────────────────────────── */
+    .wrap { width: 90%; max-width: 1180px; margin: 0 auto; }
+    section { padding: 110px 0; }
 
-    /* ─── NAV ────────────────────────────────────────────────────── */
+    /* ─── ATOMS ──────────────────────────────────────────────────── */
+    .chip {
+      display: inline-flex; align-items: center; gap: .45rem;
+      font-family: var(--mono); font-size: .68rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--accentl);
+      border: 1px solid var(--border); border-radius: var(--r);
+      padding: .28rem .8rem; background: rgba(124,58,237,.08);
+    }
+    .chip::before { content: '◈'; font-size: .5rem; }
+
+    .btn-fill {
+      display: inline-block;
+      font-family: var(--body); font-weight: 700; font-size: .88rem;
+      letter-spacing: .04em; padding: .75rem 1.8rem;
+      background: var(--p3); color: #fff; border-radius: var(--r);
+      transition: background var(--t), transform var(--t);
+    }
+    .btn-fill:hover { background: var(--p2); transform: translateY(-2px); }
+
+    .btn-line {
+      display: inline-block;
+      font-family: var(--body); font-weight: 600; font-size: .88rem;
+      letter-spacing: .04em; padding: .75rem 1.8rem;
+      border: 1.5px solid var(--border); color: var(--muted);
+      border-radius: var(--r);
+      transition: border-color var(--t), color var(--t), background var(--t);
+    }
+    .btn-line:hover { border-color: var(--borderh); color: var(--accentl); background: rgba(124,58,237,.07); }
+
+    .hr { height: 1px; background: var(--border); margin: 0; }
+
+    /* ─── SECTION HEAD ───────────────────────────────────────────── */
+    .sh { margin-bottom: 3.5rem; }
+    .sh-title {
+      font-family: var(--display); letter-spacing: .04em;
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      line-height: 1; margin-top: .9rem;
+      color: var(--text);
+    }
+    .sh-sub { color: var(--muted); margin-top: .75rem; max-width: 500px; font-size: .95rem; }
+
+    /* ─── FADE REVEAL ────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .65s var(--ease), transform .65s var(--ease);
+    }
+    .reveal.on { opacity: 1; transform: none; }
+    .reveal:nth-child(2) { transition-delay: .08s; }
+    .reveal:nth-child(3) { transition-delay: .16s; }
+    .reveal:nth-child(4) { transition-delay: .24s; }
+    .reveal:nth-child(5) { transition-delay: .32s; }
+    .reveal:nth-child(6) { transition-delay: .40s; }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       NAV
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     #nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: var(--bg);
+      position: fixed; inset: 0 0 auto 0; z-index: 200;
       border-bottom: 1px solid var(--border);
-      transition: background var(--t) var(--ease), border-color var(--t) var(--ease);
+      background: var(--bg);
+      transition: background var(--t), border-color var(--t), box-shadow var(--t);
     }
+    #nav.scrolled { box-shadow: 0 6px 40px rgba(0,0,0,.35); }
     .nav-inner {
       display: flex; align-items: center; justify-content: space-between;
-      height: 64px;
+      height: 68px;
     }
-    .logo {
-      font-family: var(--display); font-weight: 800; font-size: 1.1rem;
-      letter-spacing: .05em; color: var(--text);
-      display: flex; align-items: center; gap: .6rem;
+    /* Logo */
+    .nav-logo {
+      display: flex; align-items: center; gap: .65rem;
+      font-family: var(--display); font-size: 1.25rem; letter-spacing: .06em;
+      color: var(--text);
     }
-    .logo-hex {
-      width: 30px; height: 30px; position: relative;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .logo-hex svg { width: 30px; height: 30px; }
-    .logo span { color: var(--purple-light); }
+    .nav-logo img { width: 38px; height: 38px; object-fit: contain; }
+    .nav-logo .txt-blue { color: var(--bluel); }
+
+    /* Links */
     .nav-links {
-      display: flex; align-items: center; gap: 2.5rem;
-      font-family: var(--mono); font-size: .78rem; letter-spacing: .08em;
-      text-transform: uppercase;
+      display: flex; gap: 2.2rem;
+      font-family: var(--body); font-weight: 600;
+      font-size: .82rem; letter-spacing: .03em;
     }
-    .nav-links a {
-      color: var(--text-muted);
-      transition: color var(--t) var(--ease);
-      position: relative;
-    }
+    .nav-links a { color: var(--muted); position: relative; transition: color var(--t); }
     .nav-links a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px;
-      background: var(--purple-light); transform: scaleX(0);
-      transition: transform var(--t) var(--ease);
+      content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+      background: var(--p4); border-radius: 99px;
+      transform: scaleX(0); transition: transform var(--t) var(--ease);
     }
     .nav-links a:hover { color: var(--text); }
     .nav-links a:hover::after { transform: scaleX(1); }
-    .nav-right { display: flex; align-items: center; gap: 1rem; }
-    #theme-btn {
-      width: 38px; height: 38px; border-radius: 2px;
-      border: 1px solid var(--border); color: var(--text-muted);
+
+    .nav-right { display: flex; align-items: center; gap: .75rem; }
+
+    /* Theme toggle */
+    #tbtn {
+      width: 40px; height: 40px; border-radius: var(--r);
+      border: 1px solid var(--border); color: var(--muted);
       display: flex; align-items: center; justify-content: center;
-      transition: border-color var(--t), color var(--t), background var(--t);
+      font-size: 1.05rem; transition: all var(--t);
     }
-    #theme-btn:hover { border-color: var(--purple-light); color: var(--purple-light); background: rgba(109,40,217,.07); }
-    .btn-primary {
-      font-family: var(--mono); font-size: .75rem; letter-spacing: .1em;
-      text-transform: uppercase; padding: .65rem 1.4rem;
-      background: var(--purple); color: #fff; border-radius: 2px;
-      transition: background var(--t), transform var(--t);
-    }
-    .btn-primary:hover { background: var(--purple-mid); transform: translateY(-1px); }
-    #mobile-menu-btn {
-      display: none; width: 38px; height: 38px;
-      align-items: center; justify-content: center;
-      border: 1px solid var(--border); border-radius: 2px; color: var(--text-muted);
+    #tbtn:hover { border-color: var(--borderh); color: var(--accentl); background: rgba(124,58,237,.08); }
+
+    #hmbtn {
+      display: none; width: 40px; height: 40px; border-radius: var(--r);
+      border: 1px solid var(--border); color: var(--muted);
+      align-items: center; justify-content: center; font-size: 1.2rem;
     }
 
-    /* ─── HERO ───────────────────────────────────────────────────── */
+    /* Mobile overlay */
+    #mob {
+      display: none; position: fixed; inset: 0; z-index: 199;
+      background: var(--bg); flex-direction: column;
+      padding: 90px 5% 40px; gap: 0;
+    }
+    #mob.open { display: flex; }
+    #mob a {
+      font-family: var(--display); font-size: 2.8rem; letter-spacing: .05em;
+      color: var(--dim); padding: .6rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color var(--t);
+    }
+    #mob a:hover { color: var(--p4); }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       HERO
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     #hero {
       min-height: 100vh; display: flex; align-items: center;
-      padding: 120px 0 80px; position: relative; overflow: hidden;
+      padding: 130px 0 90px; position: relative; overflow: hidden;
     }
-    .hero-grid {
+    /* dot-grid bg */
+    #hero::before {
+      content: '';
       position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
-      opacity: .4;
+      background-image: radial-gradient(circle, rgba(124,58,237,.18) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 80%);
     }
-    .hero-content { position: relative; z-index: 1; max-width: 900px; }
-    .hero-tag { margin-bottom: 2rem; }
+    .hero-layout {
+      display: grid; grid-template-columns: 1fr 400px;
+      gap: 3rem; align-items: center; position: relative; z-index: 1;
+    }
+    .hero-tag { margin-bottom: 1.8rem; }
     .hero-title {
-      font-family: var(--display); font-weight: 800;
-      font-size: clamp(3rem, 7vw, 6.5rem);
-      line-height: .95; letter-spacing: -.02em;
-      margin-bottom: 1.5rem;
+      font-family: var(--display); letter-spacing: .04em;
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      line-height: .95; margin-bottom: 1.6rem;
     }
-    .hero-title .accent { color: var(--purple-light); }
-    .hero-title .outline {
-      -webkit-text-stroke: 1.5px var(--purple-light);
+    .hero-title .c-blue { color: var(--bluel); }
+    .hero-title .c-grey {
+      -webkit-text-stroke: 1.5px var(--g5);
       color: transparent;
     }
     .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.15rem);
-      color: var(--text-muted); max-width: 560px;
-      margin-bottom: 2.5rem; line-height: 1.8;
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 540px; margin-bottom: 2.5rem; font-weight: 400;
     }
     .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-ghost {
-      font-family: var(--mono); font-size: .75rem; letter-spacing: .1em;
-      text-transform: uppercase; padding: .65rem 1.4rem;
-      border: 1px solid var(--border); color: var(--text-muted); border-radius: 2px;
-      transition: border-color var(--t), color var(--t), background var(--t);
-    }
-    .btn-ghost:hover { border-color: var(--purple-light); color: var(--purple-light); background: rgba(109,40,217,.07); }
+
+    /* hero stats */
     .hero-stats {
-      margin-top: 5rem; padding-top: 3rem;
+      margin-top: 4.5rem; padding-top: 3rem;
       border-top: 1px solid var(--border);
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
     }
-    .stat-num {
-      font-family: var(--display); font-size: 2.8rem;
-      font-weight: 800; color: var(--purple-light); line-height: 1;
+    .stat-n {
+      font-family: var(--display); font-size: 3.2rem; letter-spacing: .04em;
+      line-height: 1; color: var(--p4);
     }
-    .stat-label { font-family: var(--mono); font-size: .72rem; color: var(--text-dim); letter-spacing: .1em; text-transform: uppercase; margin-top: .4rem; }
-    .hero-badge {
-      position: absolute; right: 0; top: 50%;
-      transform: translateY(-50%);
-      width: 320px; height: 320px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .hero-badge-inner {
-      width: 240px; height: 240px; border-radius: 50%;
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .hero-badge-core {
-      width: 160px; height: 160px; border-radius: 50%;
-      background: var(--bg-card); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--display); font-size: 2.5rem;
-    }
-    .orbit-dot {
-      position: absolute; width: 8px; height: 8px;
-      background: var(--purple-light); border-radius: 50%;
-    }
+    .stat-l { font-family: var(--mono); font-size: .65rem; color: var(--dim); letter-spacing: .12em; text-transform: uppercase; margin-top: .3rem; }
 
-    /* ─── SECTION BASE ─────────────────────────────────────────── */
-    section { padding: 100px 0; }
-    .section-head { margin-bottom: 4rem; }
-    .section-title {
-      font-family: var(--display); font-weight: 800;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 1.05; letter-spacing: -.02em;
-      margin-top: 1rem;
-    }
-    .section-desc { color: var(--text-muted); margin-top: 1rem; max-width: 480px; }
-
-    /* ─── WHY HEXAVERSE ─────────────────────────────────────────── */
-    #why { background: var(--bg-2); }
-    .why-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-    }
-    .why-text { }
-    .why-text p { color: var(--text-muted); margin-bottom: 1.2rem; }
-    .why-pillars { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
-    .pillar {
-      display: flex; gap: 1rem; align-items: flex-start;
-      padding: 1.2rem; border: 1px solid var(--border);
-      background: var(--bg-card); border-radius: 2px;
-      transition: border-color var(--t), background var(--t);
-    }
-    .pillar:hover { border-color: var(--border-h); background: var(--bg-card-h); }
-    .pillar-icon {
-      width: 36px; height: 36px; flex-shrink: 0;
-      background: rgba(109,40,217,.12); border-radius: 2px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--purple-light);
-    }
-    .pillar-title { font-family: var(--display); font-weight: 700; font-size: .95rem; margin-bottom: .25rem; }
-    .pillar-desc { font-size: .85rem; color: var(--text-muted); }
-    .why-visual {
-      position: relative; height: 480px;
+    /* hero logo card */
+    .hero-visual {
       display: flex; align-items: center; justify-content: center;
     }
-    .arch-diagram {
-      width: 100%; height: 100%;
-      border: 1px solid var(--border); background: var(--bg-card);
-      border-radius: 2px; padding: 2rem;
-      font-family: var(--mono); font-size: .72rem;
-      color: var(--text-dim); overflow: hidden;
-    }
-    .arch-line { display: flex; align-items: center; gap: .5rem; margin-bottom: .5rem; }
-    .arch-line .kw { color: var(--purple-light); }
-    .arch-line .str { color: #86EFAC; }
-    .arch-line .cmt { color: var(--text-dim); }
-    .arch-line .num { color: #FCD34D; }
-    .arch-indent1 { padding-left: 1.5rem; }
-    .arch-indent2 { padding-left: 3rem; }
-    .cursor-blink {
-      display: inline-block; width: 2px; height: 1em;
-      background: var(--purple-light); vertical-align: text-bottom;
-      animation: blink 1s step-end infinite;
-    }
-    @keyframes blink { 50% { opacity: 0; } }
-
-    /* ─── FOUNDER ──────────────────────────────────────────────── */
-    #founder { }
-    .founder-grid {
-      display: grid; grid-template-columns: 340px 1fr; gap: 5rem; align-items: start;
-    }
-    .founder-card {
-      border: 1px solid var(--border); background: var(--bg-card);
-      border-radius: 2px; overflow: hidden; position: sticky; top: 90px;
-    }
-    .founder-img {
-      width: 100%; aspect-ratio: 1;
-      background: var(--bg-2);
+    .logo-card {
+      width: 360px; height: 360px;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    .founder-avatar {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 6rem;
-      background: var(--bg-2);
       position: relative;
     }
-    .founder-avatar::before {
+    .logo-card::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 60% 60%, rgba(109,40,217,.3), transparent 70%);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(92,33,182,.15), transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(37,99,235,.1), transparent 60%);
     }
-    .founder-meta {
-      padding: 1.5rem;
-      border-top: 1px solid var(--border);
-    }
-    .founder-name { font-family: var(--display); font-weight: 800; font-size: 1.3rem; }
-    .founder-role { font-family: var(--mono); font-size: .72rem; color: var(--purple-light); letter-spacing: .1em; text-transform: uppercase; margin-top: .25rem; }
-    .founder-social { margin-top: 1rem; display: flex; gap: .5rem; }
-    .social-btn {
-      width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 2px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-dim); font-size: .8rem;
-      transition: border-color var(--t), color var(--t), background var(--t);
-    }
-    .social-btn:hover { border-color: var(--border-h); color: var(--purple-light); background: rgba(109,40,217,.07); }
-    .founder-detail { }
-    .founder-detail h3 {
-      font-family: var(--display); font-weight: 700;
-      font-size: 1.8rem; margin-bottom: 1rem;
-    }
-    .founder-detail p { color: var(--text-muted); margin-bottom: 1rem; }
-    .skills-grid {
-      margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-      border: 1px solid var(--border); background: var(--border);
-    }
-    .skill-item {
-      background: var(--bg-card); padding: 1rem 1.2rem;
-      transition: background var(--t);
-    }
-    .skill-item:hover { background: var(--bg-card-h); }
-    .skill-name { font-family: var(--mono); font-size: .78rem; color: var(--text); margin-bottom: .4rem; }
-    .skill-bar { height: 2px; background: var(--border); border-radius: 99px; overflow: hidden; }
-    .skill-fill {
-      height: 100%; background: var(--purple-light); border-radius: 99px;
-      transition: width 1s var(--ease);
-    }
-    .skill-level { font-size: .7rem; color: var(--text-dim); margin-top: .3rem; font-family: var(--mono); }
-    .principle-list {
-      margin-top: 2.5rem; display: flex; flex-direction: column; gap: .75rem;
-    }
-    .principle {
-      display: flex; align-items: flex-start; gap: .75rem;
-      font-size: .9rem; color: var(--text-muted);
-    }
-    .principle::before {
-      content: '→'; color: var(--purple-light); flex-shrink: 0;
-      font-family: var(--mono); margin-top: .15rem;
-    }
+    .logo-card img { width: 280px; position: relative; z-index: 1; filter: drop-shadow(0 8px 32px rgba(124,58,237,.35)); }
 
-    /* ─── SERVICES ──────────────────────────────────────────────── */
-    #services { background: var(--bg-2); }
-    .services-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-      background: var(--border); border: 1px solid var(--border);
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       WHY HEXAVERSE
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    #why { background: var(--bg2); }
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
     }
-    .service-card {
-      background: var(--bg-card); padding: 2.5rem;
-      transition: background var(--t), transform var(--t);
+    .why-body p { color: var(--muted); margin-bottom: 1.1rem; font-size: .95rem; }
+    .pillars { margin-top: 2.2rem; display: flex; flex-direction: column; gap: .85rem; }
+    .pillar {
+      display: flex; gap: 1.1rem; align-items: flex-start;
+      padding: 1.2rem 1.4rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r);
+      transition: border-color var(--t), background var(--t);
+    }
+    .pillar:hover { border-color: var(--borderh); background: var(--cardh); }
+    .pillar-ico {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: rgba(124,58,237,.12); border-radius: var(--r);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .pillar-ttl { font-family: var(--body); font-weight: 700; font-size: .95rem; margin-bottom: .2rem; }
+    .pillar-dsc { font-size: .84rem; color: var(--muted); }
+
+    /* code block */
+    .code-box {
+      background: var(--g2); border: 1px solid var(--border);
+      border-radius: var(--r); overflow: hidden; font-family: var(--mono);
+      font-size: .73rem; line-height: 1.8;
+    }
+    .code-titlebar {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .7rem 1rem; border-bottom: 1px solid var(--border);
+      background: var(--g3);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.r { background: #F87171; }
+    .dot.y { background: #FBBF24; }
+    .dot.g { background: #34D399; }
+    .code-file { margin-left: .5rem; color: var(--dim); font-size: .65rem; }
+    .code-body { padding: 1.4rem 1.6rem; }
+    .kw { color: var(--p4); }
+    .fn { color: var(--bluel); }
+    .str { color: #86EFAC; }
+    .num { color: #FCD34D; }
+    .cmt { color: var(--g6); }
+    .ind1 { padding-left: 1.4rem; }
+    .ind2 { padding-left: 2.8rem; }
+    .ind3 { padding-left: 4.2rem; }
+    .blink { display: inline-block; width: 2px; height: .85em; background: var(--p4); vertical-align: text-bottom; animation: bl 1s step-end infinite; }
+    @keyframes bl { 50% { opacity: 0; } }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       FOUNDER
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    #founder { }
+    .founder-grid {
+      display: grid; grid-template-columns: 300px 1fr; gap: 4.5rem; align-items: start;
+    }
+    .fcard {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); overflow: hidden; position: sticky; top: 86px;
+    }
+    .fcard-top {
+      aspect-ratio: 1; background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
       position: relative; overflow: hidden;
     }
-    .service-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--purple); transform: scaleX(0);
-      transition: transform var(--t) var(--ease);
+    .fcard-top::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 65% 35%, rgba(92,33,182,.35), transparent 55%),
+        radial-gradient(circle at 30% 70%, rgba(37,99,235,.2), transparent 55%);
     }
-    .service-card:hover::before { transform: scaleX(1); }
-    .service-card:hover { background: var(--bg-card-h); }
-    .service-num {
-      font-family: var(--mono); font-size: .7rem; color: var(--text-dim);
-      letter-spacing: .12em; margin-bottom: 1.5rem;
+    .fcard-avatar { font-size: 5.5rem; position: relative; z-index: 1; }
+    .fcard-meta { padding: 1.4rem 1.5rem; border-top: 1px solid var(--border); }
+    .fcard-name { font-family: var(--body); font-weight: 800; font-size: 1.15rem; line-height: 1.25; }
+    .fcard-role {
+      font-family: var(--mono); font-size: .65rem; color: var(--p4);
+      letter-spacing: .12em; text-transform: uppercase; margin-top: .3rem;
     }
-    .service-icon {
-      width: 44px; height: 44px; background: rgba(109,40,217,.1);
-      border-radius: 2px; display: flex; align-items: center; justify-content: center;
-      color: var(--purple-light); margin-bottom: 1.5rem;
-    }
-    .service-title {
-      font-family: var(--display); font-weight: 700; font-size: 1.15rem;
-      margin-bottom: .75rem;
-    }
-    .service-desc { font-size: .88rem; color: var(--text-muted); line-height: 1.7; }
-    .service-tags { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: .4rem; }
-    .stag {
-      font-family: var(--mono); font-size: .65rem; letter-spacing: .08em;
-      text-transform: uppercase; padding: .2rem .6rem;
-      border: 1px solid var(--border); border-radius: 2px; color: var(--text-dim);
-    }
-
-    /* ─── PROJECTS ──────────────────────────────────────────────── */
-    #projects { }
-    .projects-filter {
-      display: flex; gap: .5rem; margin-bottom: 2.5rem; flex-wrap: wrap;
-    }
-    .filter-btn {
-      font-family: var(--mono); font-size: .72rem; letter-spacing: .08em;
-      text-transform: uppercase; padding: .4rem 1rem;
-      border: 1px solid var(--border); border-radius: 2px; color: var(--text-dim);
+    .fcard-socials { margin-top: 1rem; display: flex; gap: .4rem; }
+    .soc {
+      width: 32px; height: 32px; border-radius: var(--r);
+      border: 1px solid var(--border); color: var(--dim);
+      display: flex; align-items: center; justify-content: center; font-size: .75rem;
       transition: all var(--t);
     }
-    .filter-btn.active,
-    .filter-btn:hover {
-      border-color: var(--purple-light); color: var(--purple-light);
-      background: rgba(109,40,217,.08);
+    .soc:hover { border-color: var(--borderh); color: var(--p4); background: rgba(124,58,237,.08); }
+
+    /* detail */
+    .fdetail h3 {
+      font-family: var(--body); font-weight: 800; font-size: 1.7rem;
+      line-height: 1.2; margin-bottom: 1rem; margin-top: .8rem;
     }
-    .projects-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-      background: var(--border); border: 1px solid var(--border);
+    .fdetail p { color: var(--muted); margin-bottom: .9rem; font-size: .95rem; }
+    .skills-wrap {
+      margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      border: 1px solid var(--border); background: var(--border); border-radius: var(--r); overflow: hidden;
     }
-    .project-card {
-      background: var(--bg-card); overflow: hidden;
+    .sk {
+      background: var(--card); padding: 1rem 1.2rem;
       transition: background var(--t);
-      display: flex; flex-direction: column;
     }
-    .project-card:hover { background: var(--bg-card-h); }
-    .project-thumb {
-      aspect-ratio: 16/9; background: var(--bg-2);
+    .sk:hover { background: var(--cardh); }
+    .sk-name { font-family: var(--body); font-weight: 600; font-size: .82rem; margin-bottom: .45rem; }
+    .sk-bar { height: 3px; background: var(--g4); border-radius: 99px; overflow: hidden; }
+    .sk-fill { height: 100%; background: var(--p3); border-radius: 99px; }
+    .sk-lv { font-family: var(--mono); font-size: .62rem; color: var(--dim); margin-top: .3rem; }
+    .principles { margin-top: 2rem; display: flex; flex-direction: column; gap: .65rem; }
+    .pr {
+      display: flex; gap: .75rem; align-items: flex-start;
+      font-size: .9rem; color: var(--muted); padding: .75rem 1rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r);
+    }
+    .pr-arrow { color: var(--bluel); font-weight: 700; flex-shrink: 0; font-size: .95rem; margin-top: .05rem; }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SERVICES
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    #services { background: var(--bg2); }
+    .svc-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: var(--r); overflow: hidden;
+    }
+    .svc {
+      background: var(--card); padding: 2.2rem;
       position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
+      transition: background var(--t);
     }
-    .project-thumb-inner {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem; opacity: .3;
-      transition: transform var(--t) var(--ease), opacity var(--t);
+    .svc::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--p3), var(--b3));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--t) var(--ease);
     }
-    .project-card:hover .project-thumb-inner { transform: scale(1.05); opacity: .5; }
-    .project-thumb-overlay {
+    .svc:hover::before { transform: scaleX(1); }
+    .svc:hover { background: var(--cardh); }
+    .svc-num {
+      font-family: var(--mono); font-size: .62rem; color: var(--dim);
+      letter-spacing: .15em; margin-bottom: 1.3rem;
+    }
+    .svc-icon {
+      width: 44px; height: 44px; border-radius: var(--r);
+      background: rgba(124,58,237,.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 1.3rem;
+    }
+    .svc-title { font-family: var(--body); font-weight: 800; font-size: 1.05rem; margin-bottom: .6rem; }
+    .svc-desc { font-size: .85rem; color: var(--muted); line-height: 1.75; }
+    .svc-tags { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: .35rem; }
+    .stag {
+      font-family: var(--mono); font-size: .6rem; letter-spacing: .08em;
+      padding: .18rem .55rem; border: 1px solid var(--border);
+      border-radius: 3px; color: var(--dim); text-transform: uppercase;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       PROJECTS
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    #projects { }
+    .pfilter { display: flex; gap: .5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .pfbtn {
+      font-family: var(--body); font-weight: 600; font-size: .8rem;
+      padding: .38rem 1.1rem; border-radius: var(--r);
+      border: 1px solid var(--border); color: var(--dim);
+      transition: all var(--t);
+    }
+    .pfbtn.on, .pfbtn:hover {
+      border-color: var(--p4); color: var(--p4); background: rgba(124,58,237,.08);
+    }
+    .proj-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: var(--r); overflow: hidden;
+    }
+    .pcard {
+      background: var(--card); display: flex; flex-direction: column;
+      transition: background var(--t);
+    }
+    .pcard:hover { background: var(--cardh); }
+    .pthumb {
+      aspect-ratio: 16/9; background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .pthumb-em {
+      font-size: 3rem; opacity: .28;
+      transition: opacity var(--t), transform var(--t) var(--ease);
+    }
+    .pcard:hover .pthumb-em { opacity: .5; transform: scale(1.07); }
+    .pthumb-ov {
       position: absolute; inset: 0;
-      background: rgba(109,40,217,.1);
+      background: rgba(92,33,182,.15);
       opacity: 0; transition: opacity var(--t);
       display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: #fff;
     }
-    .project-card:hover .project-thumb-overlay { opacity: 1; }
-    .project-info { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
-    .project-cat {
-      font-family: var(--mono); font-size: .65rem; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--purple-light); margin-bottom: .5rem;
+    .pcard:hover .pthumb-ov { opacity: 1; }
+    .pinfo { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
+    .pcat {
+      font-family: var(--mono); font-size: .62rem; color: var(--p4);
+      letter-spacing: .12em; text-transform: uppercase; margin-bottom: .4rem;
     }
-    .project-name {
-      font-family: var(--display); font-weight: 700; font-size: 1.05rem;
-      margin-bottom: .5rem;
-    }
-    .project-desc { font-size: .84rem; color: var(--text-muted); flex: 1; }
-    .project-footer {
-      margin-top: 1rem; padding-top: 1rem;
+    .pname { font-family: var(--body); font-weight: 800; font-size: 1rem; margin-bottom: .4rem; }
+    .pdesc { font-size: .83rem; color: var(--muted); flex: 1; }
+    .pfoot {
+      margin-top: .9rem; padding-top: .9rem;
       border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
     }
-    .project-stack { display: flex; gap: .3rem; flex-wrap: wrap; }
-    .stack-tag {
-      font-family: var(--mono); font-size: .6rem; letter-spacing: .06em;
-      padding: .15rem .5rem; border: 1px solid var(--border); border-radius: 2px; color: var(--text-dim);
+    .pstack { display: flex; flex-wrap: wrap; gap: .25rem; }
+    .ps { font-family: var(--mono); font-size: .58rem; padding: .15rem .45rem; border: 1px solid var(--border); color: var(--dim); border-radius: 3px; }
+    .plink {
+      width: 28px; height: 28px; border: 1px solid var(--border);
+      border-radius: 3px; display: flex; align-items: center; justify-content: center;
+      color: var(--dim); font-size: .75rem; flex-shrink: 0;
+      transition: all var(--t);
     }
-    .project-link {
-      width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 2px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-dim); flex-shrink: 0;
-      transition: border-color var(--t), color var(--t);
-    }
-    .project-link:hover { border-color: var(--purple-light); color: var(--purple-light); }
+    .plink:hover { border-color: var(--borderh); color: var(--p4); }
 
-    /* ─── CONTACT ───────────────────────────────────────────────── */
-    #contact { background: var(--bg-2); }
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       CONTACT
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    #contact { background: var(--bg2); }
     .contact-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
     }
-    .contact-info h2 {
-      font-family: var(--display); font-weight: 800; font-size: 2.5rem;
-      line-height: 1.05; letter-spacing: -.02em; margin-bottom: 1rem;
+    .cinfo h2 {
+      font-family: var(--display); font-size: clamp(2.2rem, 4vw, 3.5rem);
+      letter-spacing: .04em; line-height: 1; margin: .8rem 0 .75rem;
     }
-    .contact-info p { color: var(--text-muted); margin-bottom: 2rem; }
-    .contact-items { display: flex; flex-direction: column; gap: .75rem; }
-    .contact-item {
-      display: flex; align-items: center; gap: 1rem;
-      padding: 1rem; border: 1px solid var(--border); background: var(--bg-card); border-radius: 2px;
-      transition: border-color var(--t), background var(--t);
+    .cinfo p { color: var(--muted); margin-bottom: 2rem; font-size: .95rem; }
+    .citems { display: flex; flex-direction: column; gap: .7rem; }
+    .citem {
+      display: flex; gap: 1rem; align-items: center;
+      padding: 1rem 1.2rem; background: var(--card);
+      border: 1px solid var(--border); border-radius: var(--r);
+      transition: all var(--t);
     }
-    .contact-item:hover { border-color: var(--border-h); background: var(--bg-card-h); }
-    .contact-item-icon {
-      width: 36px; height: 36px; border-radius: 2px;
-      background: rgba(109,40,217,.1); display: flex; align-items: center; justify-content: center;
-      color: var(--purple-light); flex-shrink: 0;
+    .citem:hover { border-color: var(--borderh); background: var(--cardh); }
+    .cico {
+      width: 38px; height: 38px; flex-shrink: 0; border-radius: var(--r);
+      background: rgba(124,58,237,.12);
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
     }
-    .contact-item-label { font-family: var(--mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim); }
-    .contact-item-val { font-size: .9rem; color: var(--text); margin-top: .1rem; }
-    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-    .form-group { display: flex; flex-direction: column; gap: .4rem; }
-    .form-label { font-family: var(--mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim); }
-    .form-input, .form-textarea {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 2px; padding: .75rem 1rem; color: var(--text);
-      font-family: var(--sans); font-size: .9rem;
-      transition: border-color var(--t); outline: none; resize: none;
+    .cil { font-family: var(--mono); font-size: .62rem; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; }
+    .civ { font-family: var(--body); font-weight: 500; font-size: .9rem; margin-top: .1rem; }
+    .cform { display: flex; flex-direction: column; gap: .9rem; }
+    .fg { display: flex; flex-direction: column; gap: .35rem; }
+    .fl { font-family: var(--mono); font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+    .fi, .ft {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: .75rem 1rem;
+      color: var(--text); font-family: var(--body); font-size: .9rem;
+      outline: none; transition: border-color var(--t);
     }
-    .form-input:focus, .form-textarea:focus { border-color: var(--purple-light); }
-    .form-textarea { min-height: 120px; }
+    .fi:focus, .ft:focus { border-color: var(--p4); }
+    .ft { min-height: 130px; resize: none; }
 
-    /* ─── FOOTER ────────────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border); padding: 3rem 0 2rem;
-      background: var(--bg);
-    }
-    .footer-top {
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       FOOTER
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    footer { border-top: 1px solid var(--border); padding: 3.5rem 0 2rem; }
+    .ft-top {
       display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
-      padding-bottom: 3rem; border-bottom: 1px solid var(--border);
-      margin-bottom: 2rem;
+      padding-bottom: 3rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem;
     }
-    .footer-brand p { font-size: .85rem; color: var(--text-muted); margin-top: 1rem; max-width: 260px; }
-    .footer-col-title { font-family: var(--mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1rem; }
-    .footer-links { display: flex; flex-direction: column; gap: .5rem; }
-    .footer-links a { font-size: .85rem; color: var(--text-muted); transition: color var(--t); }
-    .footer-links a:hover { color: var(--purple-light); }
-    .footer-bottom {
+    .ft-brand .nav-logo { margin-bottom: 1rem; }
+    .ft-brand p { font-size: .85rem; color: var(--muted); max-width: 260px; }
+    .ft-ch { font-family: var(--mono); font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-bottom: .9rem; }
+    .ft-links { display: flex; flex-direction: column; gap: .45rem; }
+    .ft-links a { font-size: .85rem; color: var(--muted); transition: color var(--t); font-weight: 400; }
+    .ft-links a:hover { color: var(--p4); }
+    .ft-bot {
       display: flex; align-items: center; justify-content: space-between;
-      font-family: var(--mono); font-size: .7rem; color: var(--text-dim);
-      letter-spacing: .06em;
+      font-family: var(--mono); font-size: .65rem; color: var(--dim); letter-spacing: .06em;
     }
-    .footer-socials { display: flex; gap: .5rem; }
+    .ft-soc { display: flex; gap: .4rem; }
 
-    /* ─── MOBILE MENU ───────────────────────────────────────────── */
-    #mobile-nav {
-      display: none; position: fixed; inset: 0; z-index: 99;
-      background: var(--bg); padding: 80px 5% 40px;
-      flex-direction: column; gap: 1.5rem;
-    }
-    #mobile-nav.open { display: flex; }
-    #mobile-nav a {
-      font-family: var(--display); font-size: 2rem; font-weight: 800;
-      color: var(--text-muted); transition: color var(--t);
-      border-bottom: 1px solid var(--border); padding-bottom: 1rem;
-    }
-    #mobile-nav a:hover { color: var(--purple-light); }
-
-    /* ─── ANIMATIONS ────────────────────────────────────────────── */
-    .fade-up {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .7s var(--ease), transform .7s var(--ease);
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .fade-up:nth-child(2) { transition-delay: .1s; }
-    .fade-up:nth-child(3) { transition-delay: .2s; }
-    .fade-up:nth-child(4) { transition-delay: .3s; }
-    .fade-up:nth-child(5) { transition-delay: .4s; }
-    .fade-up:nth-child(6) { transition-delay: .5s; }
-
-    /* ─── RESPONSIVE ────────────────────────────────────────────── */
-    @media (max-width: 1024px) {
-      .hero-badge { display: none; }
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 1060px) {
+      .hero-layout { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
       .why-grid { grid-template-columns: 1fr; }
       .founder-grid { grid-template-columns: 1fr; }
-      .founder-card { position: static; }
-      .services-grid { grid-template-columns: 1fr 1fr; }
-      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .fcard { position: static; }
+      .svc-grid { grid-template-columns: 1fr 1fr; }
+      .proj-grid { grid-template-columns: 1fr 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
+      .ft-top { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 768px) {
+    @media (max-width: 700px) {
       .nav-links { display: none; }
-      #mobile-menu-btn { display: flex; }
-      .btn-primary.nav-cta { display: none; }
-      .hero-stats { grid-template-columns: 1fr; gap: 1.5rem; }
-      .services-grid { grid-template-columns: 1fr; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .skills-grid { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-    }
-    @media (max-width: 480px) {
-      section { padding: 70px 0; }
-      .contact-grid { gap: 2.5rem; }
+      .nav-cta { display: none; }
+      #hmbtn { display: flex; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .skills-wrap { grid-template-columns: 1fr; }
+      .ft-top { grid-template-columns: 1fr; }
+      .ft-bot { flex-direction: column; gap: 1rem; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══════════════════ NAV ══════════════════ -->
 <nav id="nav">
-  <div class="container nav-inner">
-    <a href="#" class="logo">
-      <div class="logo-hex">
-        <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 2L27 9V21L15 28L3 21V9L15 2Z" stroke="#8B5CF6" stroke-width="1.5" fill="none"/>
-          <path d="M15 8L21 11.5V18.5L15 22L9 18.5V11.5L15 8Z" fill="#6D28D9" opacity="0.7"/>
-          <circle cx="15" cy="15" r="2" fill="#8B5CF6"/>
-        </svg>
-      </div>
-      HEXAVERSE <span>STUDIO</span>
+  <div class="wrap nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="/mnt/user-data/uploads/hexaverse_logos.png" alt="Hexaverse Studio Logo" />
+      HEXAVERSE <span class="txt-blue">STUDIO</span>
     </a>
     <div class="nav-links">
       <a href="#why">Why Us</a>
@@ -596,482 +612,372 @@
       <a href="#contact">Contact</a>
     </div>
     <div class="nav-right">
-      <button id="theme-btn" title="Toggle theme">
-        <svg id="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <svg id="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
-      <a href="#contact" class="btn-primary nav-cta">Hire Us</a>
-      <button id="mobile-menu-btn">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
+      <button id="tbtn" title="Toggle theme">☀️</button>
+      <a href="#contact" class="btn-fill nav-cta" style="font-size:.82rem;padding:.58rem 1.2rem">Hire Us</a>
+      <button id="hmbtn">☰</button>
     </div>
   </div>
 </nav>
 
-<!-- MOBILE NAV -->
-<div id="mobile-nav">
-  <a href="#why" onclick="closeMobileNav()">Why Us</a>
-  <a href="#founder" onclick="closeMobileNav()">Founder</a>
-  <a href="#services" onclick="closeMobileNav()">Services</a>
-  <a href="#projects" onclick="closeMobileNav()">Projects</a>
-  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+<!-- mobile nav -->
+<div id="mob">
+  <a href="#why"      onclick="closeMob()">Why Us</a>
+  <a href="#founder"  onclick="closeMob()">Founder</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#projects" onclick="closeMob()">Projects</a>
+  <a href="#contact"  onclick="closeMob()">Contact</a>
 </div>
 
-<!-- HERO -->
+<!-- ══════════════════ HERO ══════════════════ -->
 <section id="hero">
-  <div class="hero-grid"></div>
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-tag fade-up">
-        <span class="tag">Digital Innovation Architects</span>
-      </div>
-      <h1 class="hero-title fade-up">
-        We Build <span class="accent">Digital</span><br>
-        Infrastructure<br>
-        That <span class="outline">Scales.</span>
-      </h1>
-      <p class="hero-sub fade-up">
-        HEXAVERSE STUDIO engineers high-performance web platforms, mobile applications, and scalable software architecture — built to endure, optimized to perform.
-      </p>
-      <div class="hero-cta fade-up">
-        <a href="#projects" class="btn-primary">View Our Work</a>
-        <a href="#contact" class="btn-ghost">Start a Project</a>
-      </div>
-      <div class="hero-stats fade-up">
-        <div>
-          <div class="stat-num">50+</div>
-          <div class="stat-label">Projects Delivered</div>
+  <div class="wrap">
+    <div class="hero-layout">
+      <div class="hero-left">
+        <div class="hero-tag reveal"><span class="chip">Architecting Multi-Dimensional Solutions</span></div>
+        <h1 class="hero-title reveal">
+          WE BUILD<br>
+          <span class="c-blue">DIGITAL</span><br>
+          INFRA<span class="c-grey">STRUCTURE</span><br>
+          THAT SCALES.
+        </h1>
+        <p class="hero-sub reveal">
+          HEXAVERSE STUDIO engineers high-performance web platforms, mobile applications, and scalable software architecture — built to endure, optimized to perform.
+        </p>
+        <div class="hero-cta reveal">
+          <a href="#projects" class="btn-fill">View Our Work</a>
+          <a href="#contact"  class="btn-line">Start a Project</a>
         </div>
-        <div>
-          <div class="stat-num">98%</div>
-          <div class="stat-label">Client Satisfaction</div>
-        </div>
-        <div>
-          <div class="stat-num">5yr</div>
-          <div class="stat-label">Industry Experience</div>
+        <div class="hero-stats reveal">
+          <div>
+            <div class="stat-n">50+</div>
+            <div class="stat-l">Projects Delivered</div>
+          </div>
+          <div>
+            <div class="stat-n">98%</div>
+            <div class="stat-l">Client Satisfaction</div>
+          </div>
+          <div>
+            <div class="stat-n">5yr</div>
+            <div class="stat-l">Industry Experience</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="hero-badge">
-      <div class="hero-badge-inner">
-        <div class="hero-badge-core">⬡</div>
+      <div class="hero-visual reveal">
+        <div class="logo-card">
+          <img src="/mnt/user-data/uploads/hexaverse_logos.png" alt="Hexaverse Studio" />
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="hr"></div>
 
-<!-- WHY HEXAVERSE -->
+<!-- ══════════════════ WHY ══════════════════ -->
 <section id="why">
-  <div class="container">
+  <div class="wrap">
     <div class="why-grid">
-      <div class="why-text">
-        <div class="section-head">
-          <span class="tag">Origin & Mission</span>
-          <h2 class="section-title">Why<br>Hexaverse?</h2>
+      <div class="why-body">
+        <div class="sh">
+          <span class="chip">Origin &amp; Mission</span>
+          <h2 class="sh-title">Why<br>Hexaverse?</h2>
         </div>
-        <p>
-          HEXAVERSE STUDIO was born from a single conviction: most digital solutions are built to function, not to last. We saw an industry saturated with fragile architectures, bloated codebases, and zero consideration for long-term performance.
-        </p>
-        <p>
-          We set out to change that. Every system we architect is designed with three non-negotiable standards at its core.
-        </p>
-        <div class="why-pillars">
-          <div class="pillar fade-up">
-            <div class="pillar-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            </div>
+        <p>HEXAVERSE STUDIO lahir dari satu keyakinan: sebagian besar solusi digital dibangun agar berfungsi — bukan agar bertahan. Kami melihat industri dipenuhi arsitektur rapuh, codebase yang membengkak, dan nol pertimbangan terhadap performa jangka panjang.</p>
+        <p>Kami hadir untuk mengubah itu. Setiap sistem yang kami rancang dibangun di atas tiga standar yang tidak bisa dikompromikan.</p>
+        <div class="pillars">
+          <div class="pillar reveal">
+            <div class="pillar-ico">⚡</div>
             <div>
-              <div class="pillar-title">High-Performance First</div>
-              <div class="pillar-desc">Sub-second load times, efficient queries, and runtime optimization are not features — they are prerequisites.</div>
+              <div class="pillar-ttl">High-Performance First</div>
+              <div class="pillar-dsc">Sub-second load times, efficient queries, dan runtime optimization bukan fitur — melainkan prasyarat.</div>
             </div>
           </div>
-          <div class="pillar fade-up">
-            <div class="pillar-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            </div>
+          <div class="pillar reveal">
+            <div class="pillar-ico">🧩</div>
             <div>
-              <div class="pillar-title">Modular Architecture</div>
-              <div class="pillar-desc">Clean separations, reusable modules, and domain-driven design that grows with your product — never against it.</div>
+              <div class="pillar-ttl">Modular Architecture</div>
+              <div class="pillar-dsc">Clean separations, reusable modules, dan domain-driven design yang tumbuh bersama produk Anda — bukan melawannya.</div>
             </div>
           </div>
-          <div class="pillar fade-up">
-            <div class="pillar-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-            </div>
+          <div class="pillar reveal">
+            <div class="pillar-ico">📦</div>
             <div>
-              <div class="pillar-title">Resource Efficiency</div>
-              <div class="pillar-desc">We engineer lean systems — minimal resource footprint, maximum throughput, zero technical debt accumulation.</div>
+              <div class="pillar-ttl">Resource Efficiency</div>
+              <div class="pillar-dsc">Sistem yang lean — footprint minimal, throughput maksimal, zero akumulasi technical debt.</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="why-visual">
-        <div class="arch-diagram">
-          <div class="arch-line"><span class="kw">module</span> <span style="color:var(--text)">HexaverseCore</span> <span class="cmt">// v2.4.1</span></div>
-          <div class="arch-line arch-indent1"><span class="kw">config</span> <span style="color:var(--text)">Architecture</span> = {</div>
-          <div class="arch-line arch-indent2"><span style="color:var(--text)">pattern</span>: <span class="str">"Domain-Driven"</span>,</div>
-          <div class="arch-line arch-indent2"><span style="color:var(--text)">layering</span>: <span class="str">"Hexagonal"</span>,</div>
-          <div class="arch-line arch-indent2"><span style="color:var(--text)">coupling</span>: <span class="str">"Loose"</span>,</div>
-          <div class="arch-line arch-indent2"><span style="color:var(--text)">cohesion</span>: <span class="str">"High"</span></div>
-          <div class="arch-line arch-indent1">}</div>
-          <div class="arch-line" style="margin-top:.5rem"></div>
-          <div class="arch-line arch-indent1"><span class="kw">fn</span> <span style="color:#C4B5FD">buildSystem</span>(<span style="color:var(--text)">spec</span>: Spec) {</div>
-          <div class="arch-line arch-indent2"><span class="kw">let</span> core = <span style="color:#C4B5FD">initDomain</span>(spec)</div>
-          <div class="arch-line arch-indent2"><span class="kw">let</span> infra = <span style="color:#C4B5FD">bindAdapters</span>(core)</div>
-          <div class="arch-line arch-indent2"><span class="kw">return</span> <span style="color:#C4B5FD">optimize</span>(infra, {</div>
-          <div class="arch-line" style="padding-left:4.5rem"><span style="color:var(--text)">perf</span>: <span class="num">99</span>,</div>
-          <div class="arch-line" style="padding-left:4.5rem"><span style="color:var(--text)">scale</span>: <span class="str">"∞"</span>,</div>
-          <div class="arch-line" style="padding-left:4.5rem"><span style="color:var(--text)">debt</span>: <span class="num">0</span></div>
-          <div class="arch-line arch-indent2">})</div>
-          <div class="arch-line arch-indent1">}</div>
-          <div class="arch-line" style="margin-top:.5rem"></div>
-          <div class="arch-line"><span class="cmt">// Output: Systems that endure.</span></div>
-          <div class="arch-line"><span class="cmt">// Hexaverse Standard™</span> <span class="cursor-blink"></span></div>
+      <div class="reveal">
+        <div class="code-box">
+          <div class="code-titlebar">
+            <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+            <span class="code-file">hexaverse.core.ts</span>
+          </div>
+          <div class="code-body">
+            <div><span class="kw">module</span> HexaverseCore <span class="cmt">// v3.1.0</span></div>
+            <div>&nbsp;</div>
+            <div class="ind1"><span class="kw">config</span> Architecture = {</div>
+            <div class="ind2">pattern:   <span class="str">"Domain-Driven"</span>,</div>
+            <div class="ind2">layering:  <span class="str">"Hexagonal"</span>,</div>
+            <div class="ind2">coupling:  <span class="str">"Loose"</span>,</div>
+            <div class="ind2">cohesion:  <span class="str">"High"</span></div>
+            <div class="ind1">}</div>
+            <div>&nbsp;</div>
+            <div class="ind1"><span class="kw">fn</span> <span class="fn">buildSystem</span>(spec: Spec) {</div>
+            <div class="ind2"><span class="kw">let</span> core  = <span class="fn">initDomain</span>(spec)</div>
+            <div class="ind2"><span class="kw">let</span> infra = <span class="fn">bindAdapters</span>(core)</div>
+            <div class="ind2"><span class="kw">return</span> <span class="fn">optimize</span>(infra, {</div>
+            <div class="ind3">perf:  <span class="num">99</span>,</div>
+            <div class="ind3">scale: <span class="str">"∞"</span>,</div>
+            <div class="ind3">debt:  <span class="num">0</span></div>
+            <div class="ind2">})</div>
+            <div class="ind1">}</div>
+            <div>&nbsp;</div>
+            <div><span class="cmt">// Output: Systems built to endure.</span></div>
+            <div><span class="cmt">// Hexaverse Standard™</span> <span class="blink"></span></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="hr"></div>
 
-<!-- FOUNDER -->
+<!-- ══════════════════ FOUNDER ══════════════════ -->
 <section id="founder">
-  <div class="container">
-    <div class="section-head" style="margin-bottom:3rem">
-      <span class="tag">The Mind Behind It</span>
-      <h2 class="section-title">Meet the Founder</h2>
+  <div class="wrap">
+    <div class="sh">
+      <span class="chip">The Mind Behind It</span>
+      <h2 class="sh-title">Meet the Founder</h2>
     </div>
     <div class="founder-grid">
-      <div class="founder-card fade-up">
-        <div class="founder-img">
-          <div class="founder-avatar">👨‍💻</div>
+      <div class="fcard reveal">
+        <div class="fcard-top">
+          <div class="fcard-avatar">👨‍💻</div>
         </div>
-        <div class="founder-meta">
-          <div class="founder-name">Reza Maulana</div>
-          <div class="founder-role">Founder & Chief Architect</div>
-          <div class="founder-social">
-            <a href="#" class="social-btn" title="GitHub">
+        <div class="fcard-meta">
+          <div class="fcard-name">Akmal Raditya Wijaya</div>
+          <div class="fcard-role">Founder &amp; Chief Architect</div>
+          <div class="fcard-socials">
+            <a href="#" class="soc" title="GitHub">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             </a>
-            <a href="#" class="social-btn" title="LinkedIn">
+            <a href="#" class="soc" title="LinkedIn">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </a>
-            <a href="#" class="social-btn" title="Twitter / X">
+            <a href="#" class="soc" title="X / Twitter">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
           </div>
         </div>
       </div>
-      <div class="founder-detail fade-up">
-        <div class="tag">Full-Stack Developer & Software Architect</div>
-        <h3 style="margin-top:1rem">Engineering software that thinks in systems, not just features.</h3>
-        <p>
-          Reza Maulana is the founder and chief architect of HEXAVERSE STUDIO. With over five years building production systems across fintech, SaaS, and enterprise platforms, his work is defined by an obsession with structural integrity and long-term code health.
-        </p>
-        <p>
-          He approaches every project as an architect first: designing the system's bones before a single line of implementation is written. His philosophy is simple — code should be readable by humans, modular by design, and performant by default.
-        </p>
-        <p>
-          Reza specializes in backend system architecture on Laravel and Node.js, frontend engineering with React and Next.js, and cross-platform mobile development. His drive to remove unnecessary complexity from software has become the founding DNA of HEXAVERSE STUDIO.
-        </p>
-        <div class="skills-grid">
-          <div class="skill-item">
-            <div class="skill-name">Software Architecture</div>
-            <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
-            <div class="skill-level">Expert</div>
+
+      <div class="fdetail reveal">
+        <span class="chip">Full-Stack Developer &amp; Software Architect</span>
+        <h3>Engineering software that thinks in systems, not just features.</h3>
+        <p>Akmal Raditya Wijaya adalah founder dan chief architect di HEXAVERSE STUDIO. Dengan lebih dari lima tahun membangun sistem produksi di ranah fintech, SaaS, dan enterprise platform, karyanya didefinisikan oleh obsesi terhadap integritas struktural dan kesehatan kode jangka panjang.</p>
+        <p>Ia mendekati setiap proyek sebagai seorang arsitek terlebih dahulu — merancang kerangka sistem sebelum satu baris implementasi pun ditulis. Filosofinya sederhana: kode harus mudah dibaca manusia, modular by design, dan performant by default.</p>
+        <p>Akmal mengkhususkan diri dalam arsitektur sistem backend dengan Laravel dan Node.js, frontend engineering menggunakan React dan Next.js, serta pengembangan mobile lintas platform.</p>
+        <div class="skills-wrap">
+          <div class="sk">
+            <div class="sk-name">Software Architecture</div>
+            <div class="sk-bar"><div class="sk-fill" style="width:95%"></div></div>
+            <div class="sk-lv">Expert — 95%</div>
           </div>
-          <div class="skill-item">
-            <div class="skill-name">Laravel / PHP</div>
-            <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
-            <div class="skill-level">Expert</div>
+          <div class="sk">
+            <div class="sk-name">Laravel / PHP</div>
+            <div class="sk-bar"><div class="sk-fill" style="width:92%"></div></div>
+            <div class="sk-lv">Expert — 92%</div>
           </div>
-          <div class="skill-item">
-            <div class="skill-name">Node.js / TypeScript</div>
-            <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
-            <div class="skill-level">Advanced</div>
+          <div class="sk">
+            <div class="sk-name">Node.js / TypeScript</div>
+            <div class="sk-bar"><div class="sk-fill" style="width:88%"></div></div>
+            <div class="sk-lv">Advanced — 88%</div>
           </div>
-          <div class="skill-item">
-            <div class="skill-name">React / Next.js</div>
-            <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-            <div class="skill-level">Expert</div>
+          <div class="sk">
+            <div class="sk-name">React / Next.js</div>
+            <div class="sk-bar"><div class="sk-fill" style="width:90%"></div></div>
+            <div class="sk-lv">Expert — 90%</div>
           </div>
-          <div class="skill-item">
-            <div class="skill-name">React Native / Flutter</div>
-            <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
-            <div class="skill-level">Advanced</div>
+          <div class="sk">
+            <div class="sk-name">React Native / Flutter</div>
+            <div class="sk-bar"><div class="sk-fill" style="width:82%"></div></div>
+            <div class="sk-lv">Advanced — 82%</div>
           </div>
-          <div class="skill-item">
-            <div class="skill-name">System Design / DDD</div>
-            <div class="skill-bar"><div class="skill-fill" style="width:94%"></div></div>
-            <div class="skill-level">Expert</div>
+          <div class="sk">
+            <div class="sk-name">System Design / DDD</div>
+            <div class="sk-bar"><div class="sk-fill" style="width:94%"></div></div>
+            <div class="sk-lv">Expert — 94%</div>
           </div>
         </div>
-        <div class="principle-list" style="margin-top:2rem">
-          <div class="principle">Write code as if the next developer is a senior who hates magic — make it explicit.</div>
-          <div class="principle">Performance is architecture. A slow system is a broken system by design.</div>
-          <div class="principle">Modularity is not a luxury. It is the only path to sustainable software.</div>
-          <div class="principle">Every abstraction must earn its place. Complexity without purpose is debt.</div>
+        <div class="principles">
+          <div class="pr"><span class="pr-arrow">→</span> Tulis kode seolah developer berikutnya adalah senior yang membenci magic — buat semuanya eksplisit.</div>
+          <div class="pr"><span class="pr-arrow">→</span> Performa adalah arsitektur. Sistem yang lambat adalah sistem yang rusak by design.</div>
+          <div class="pr"><span class="pr-arrow">→</span> Modularitas bukan kemewahan. Itu satu-satunya jalan menuju software yang berkelanjutan.</div>
+          <div class="pr"><span class="pr-arrow">→</span> Setiap abstraksi harus layak mendapat tempatnya. Kompleksitas tanpa tujuan adalah hutang.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="hr"></div>
 
-<!-- SERVICES -->
+<!-- ══════════════════ SERVICES ══════════════════ -->
 <section id="services">
-  <div class="container">
-    <div class="section-head">
-      <span class="tag">What We Deliver</span>
-      <h2 class="section-title">Our Services</h2>
-      <p class="section-desc">Every engagement is engineered from first principles — no templates, no shortcuts.</p>
+  <div class="wrap">
+    <div class="sh">
+      <span class="chip">What We Deliver</span>
+      <h2 class="sh-title">Our Services</h2>
+      <p class="sh-sub">Setiap engagement direkayasa dari prinsip pertama — tanpa template, tanpa jalan pintas.</p>
     </div>
-    <div class="services-grid">
-      <div class="service-card fade-up">
-        <div class="service-num">01 / ARCHITECTURE</div>
-        <div class="service-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <div class="service-title">Software Architecture</div>
-        <div class="service-desc">Domain-driven design, hexagonal architecture, and event-driven systems built for longevity. We design systems that grow without rot.</div>
-        <div class="service-tags">
-          <span class="stag">DDD</span>
-          <span class="stag">Clean Arch</span>
-          <span class="stag">CQRS</span>
-          <span class="stag">Event-Driven</span>
-          <span class="stag">Microservices</span>
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <div class="svc-num">01 / ARCHITECTURE</div>
+        <div class="svc-icon">🏗️</div>
+        <div class="svc-title">Software Architecture</div>
+        <div class="svc-desc">Domain-driven design, hexagonal architecture, dan event-driven systems yang dibangun untuk ketahanan jangka panjang.</div>
+        <div class="svc-tags">
+          <span class="stag">DDD</span><span class="stag">Clean Arch</span><span class="stag">CQRS</span><span class="stag">Event-Driven</span>
         </div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-num">02 / WEB</div>
-        <div class="service-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-        </div>
-        <div class="service-title">Web Development</div>
-        <div class="service-desc">Full-stack web platforms with Laravel and Node.js backends, React/Next.js frontends, and API architectures that scale to millions of requests.</div>
-        <div class="service-tags">
-          <span class="stag">Laravel</span>
-          <span class="stag">Node.js</span>
-          <span class="stag">Next.js</span>
-          <span class="stag">REST</span>
-          <span class="stag">GraphQL</span>
+      <div class="svc reveal">
+        <div class="svc-num">02 / WEB</div>
+        <div class="svc-icon">🌐</div>
+        <div class="svc-title">Web Development</div>
+        <div class="svc-desc">Full-stack web platform dengan backend Laravel dan Node.js, frontend React/Next.js, dan API architecture yang scale ke jutaan request.</div>
+        <div class="svc-tags">
+          <span class="stag">Laravel</span><span class="stag">Node.js</span><span class="stag">Next.js</span><span class="stag">REST</span>
         </div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-num">03 / MOBILE</div>
-        <div class="service-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-        </div>
-        <div class="service-title">Mobile Applications</div>
-        <div class="service-desc">Cross-platform mobile applications with React Native and Flutter — native performance, shared codebase, seamless UX on iOS and Android.</div>
-        <div class="service-tags">
-          <span class="stag">React Native</span>
-          <span class="stag">Flutter</span>
-          <span class="stag">iOS</span>
-          <span class="stag">Android</span>
+      <div class="svc reveal">
+        <div class="svc-num">03 / MOBILE</div>
+        <div class="svc-icon">📱</div>
+        <div class="svc-title">Mobile Applications</div>
+        <div class="svc-desc">Aplikasi mobile cross-platform dengan React Native dan Flutter — performa native, shared codebase, UX seamless di iOS &amp; Android.</div>
+        <div class="svc-tags">
+          <span class="stag">React Native</span><span class="stag">Flutter</span><span class="stag">iOS</span><span class="stag">Android</span>
         </div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-num">04 / BACKEND</div>
-        <div class="service-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-        </div>
-        <div class="service-title">API & Backend Systems</div>
-        <div class="service-desc">High-throughput API design, database optimization, caching layers, and message queue systems that handle production load gracefully.</div>
-        <div class="service-tags">
-          <span class="stag">REST API</span>
-          <span class="stag">PostgreSQL</span>
-          <span class="stag">Redis</span>
-          <span class="stag">RabbitMQ</span>
+      <div class="svc reveal">
+        <div class="svc-num">04 / BACKEND</div>
+        <div class="svc-icon">🗄️</div>
+        <div class="svc-title">API &amp; Backend Systems</div>
+        <div class="svc-desc">High-throughput API design, database optimization, caching layers, dan message queue systems yang menangani production load dengan elegan.</div>
+        <div class="svc-tags">
+          <span class="stag">REST API</span><span class="stag">PostgreSQL</span><span class="stag">Redis</span><span class="stag">Kafka</span>
         </div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-num">05 / DEVOPS</div>
-        <div class="service-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-        </div>
-        <div class="service-title">DevOps & Infrastructure</div>
-        <div class="service-desc">CI/CD pipelines, containerized deployments, cloud infrastructure on AWS/GCP, and monitoring setups that give you full operational visibility.</div>
-        <div class="service-tags">
-          <span class="stag">Docker</span>
-          <span class="stag">Kubernetes</span>
-          <span class="stag">AWS</span>
-          <span class="stag">CI/CD</span>
+      <div class="svc reveal">
+        <div class="svc-num">05 / DEVOPS</div>
+        <div class="svc-icon">⚙️</div>
+        <div class="svc-title">DevOps &amp; Infrastructure</div>
+        <div class="svc-desc">CI/CD pipelines, containerized deployments, cloud infrastructure di AWS/GCP, dan monitoring setup dengan visibilitas operasional penuh.</div>
+        <div class="svc-tags">
+          <span class="stag">Docker</span><span class="stag">Kubernetes</span><span class="stag">AWS</span><span class="stag">CI/CD</span>
         </div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-num">06 / AUDIT</div>
-        <div class="service-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        </div>
-        <div class="service-title">Code & Architecture Audit</div>
-        <div class="service-desc">Deep structural review of existing codebases — identifying architectural debt, performance bottlenecks, and security vulnerabilities with a clear remediation roadmap.</div>
-        <div class="service-tags">
-          <span class="stag">Code Review</span>
-          <span class="stag">Perf Audit</span>
-          <span class="stag">Security</span>
+      <div class="svc reveal">
+        <div class="svc-num">06 / AUDIT</div>
+        <div class="svc-icon">🔍</div>
+        <div class="svc-title">Code &amp; Architecture Audit</div>
+        <div class="svc-desc">Review struktural mendalam pada codebase yang ada — identifikasi architectural debt, bottleneck performa, dan kerentanan keamanan.</div>
+        <div class="svc-tags">
+          <span class="stag">Code Review</span><span class="stag">Perf Audit</span><span class="stag">Security</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="hr"></div>
 
-<!-- PROJECTS -->
+<!-- ══════════════════ PROJECTS ══════════════════ -->
 <section id="projects">
-  <div class="container">
-    <div class="section-head">
-      <span class="tag">Selected Work</span>
-      <h2 class="section-title">Project Portfolio</h2>
-      <p class="section-desc">A selection of systems and platforms engineered by HEXAVERSE STUDIO.</p>
+  <div class="wrap">
+    <div class="sh">
+      <span class="chip">Selected Work</span>
+      <h2 class="sh-title">Project Portfolio</h2>
+      <p class="sh-sub">Pilihan sistem dan platform yang direkayasa oleh HEXAVERSE STUDIO.</p>
     </div>
-    <div class="projects-filter">
-      <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
-      <button class="filter-btn" onclick="filterProjects('web', this)">Web</button>
-      <button class="filter-btn" onclick="filterProjects('mobile', this)">Mobile</button>
-      <button class="filter-btn" onclick="filterProjects('api', this)">API / Backend</button>
+    <div class="pfilter">
+      <button class="pfbtn on" onclick="filterP('all',this)">All</button>
+      <button class="pfbtn" onclick="filterP('web',this)">Web</button>
+      <button class="pfbtn" onclick="filterP('mobile',this)">Mobile</button>
+      <button class="pfbtn" onclick="filterP('api',this)">API / Backend</button>
     </div>
-    <div class="projects-grid" id="projects-grid">
-      <div class="project-card fade-up" data-cat="web">
-        <div class="project-thumb">
-          <div class="project-thumb-inner">🏦</div>
-          <div class="project-thumb-overlay">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="project-cat">Web · Fintech</div>
-          <div class="project-name">NexaPay — Digital Banking Platform</div>
-          <div class="project-desc">Multi-tenant banking dashboard with real-time transaction processing, role-based access control, and regulatory compliance module.</div>
-          <div class="project-footer">
-            <div class="project-stack">
-              <span class="stack-tag">Laravel</span>
-              <span class="stack-tag">Next.js</span>
-              <span class="stack-tag">PostgreSQL</span>
-            </div>
-            <a href="#" class="project-link">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
+    <div class="proj-grid" id="pgrid">
+      <div class="pcard reveal" data-c="web">
+        <div class="pthumb"><div class="pthumb-em">🏦</div><div class="pthumb-ov">↗</div></div>
+        <div class="pinfo">
+          <div class="pcat">Web · Fintech</div>
+          <div class="pname">NexaPay — Digital Banking Platform</div>
+          <div class="pdesc">Multi-tenant banking dashboard dengan real-time transaction processing, RBAC, dan modul regulatory compliance.</div>
+          <div class="pfoot">
+            <div class="pstack"><span class="ps">Laravel</span><span class="ps">Next.js</span><span class="ps">PostgreSQL</span></div>
+            <a href="#" class="plink">↗</a>
           </div>
         </div>
       </div>
-      <div class="project-card fade-up" data-cat="mobile">
-        <div class="project-thumb">
-          <div class="project-thumb-inner">🛒</div>
-          <div class="project-thumb-overlay">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="project-cat">Mobile · E-Commerce</div>
-          <div class="project-name">Kiramat — UMKM Marketplace App</div>
-          <div class="project-desc">Cross-platform mobile marketplace for Indonesian SMEs. Features offline mode, OTP auth, and integrated payment gateway.</div>
-          <div class="project-footer">
-            <div class="project-stack">
-              <span class="stack-tag">React Native</span>
-              <span class="stack-tag">Node.js</span>
-              <span class="stack-tag">Redis</span>
-            </div>
-            <a href="#" class="project-link">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
+      <div class="pcard reveal" data-c="mobile">
+        <div class="pthumb"><div class="pthumb-em">🛒</div><div class="pthumb-ov">↗</div></div>
+        <div class="pinfo">
+          <div class="pcat">Mobile · E-Commerce</div>
+          <div class="pname">Kiramat — UMKM Marketplace App</div>
+          <div class="pdesc">Marketplace mobile cross-platform untuk UMKM Indonesia. Offline mode, OTP auth, dan integrasi payment gateway.</div>
+          <div class="pfoot">
+            <div class="pstack"><span class="ps">React Native</span><span class="ps">Node.js</span><span class="ps">Redis</span></div>
+            <a href="#" class="plink">↗</a>
           </div>
         </div>
       </div>
-      <div class="project-card fade-up" data-cat="api">
-        <div class="project-thumb">
-          <div class="project-thumb-inner">⚡</div>
-          <div class="project-thumb-overlay">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="project-cat">API · Infrastructure</div>
-          <div class="project-name">FluxCore — High-Throughput API Gateway</div>
-          <div class="project-desc">API gateway handling 2M+ daily requests with rate limiting, JWT auth, request routing, and analytics pipeline.</div>
-          <div class="project-footer">
-            <div class="project-stack">
-              <span class="stack-tag">Node.js</span>
-              <span class="stack-tag">Redis</span>
-              <span class="stack-tag">Kafka</span>
-            </div>
-            <a href="#" class="project-link">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
+      <div class="pcard reveal" data-c="api">
+        <div class="pthumb"><div class="pthumb-em">⚡</div><div class="pthumb-ov">↗</div></div>
+        <div class="pinfo">
+          <div class="pcat">API · Infrastructure</div>
+          <div class="pname">FluxCore — High-Throughput API Gateway</div>
+          <div class="pdesc">API gateway yang menangani 2M+ request harian — rate limiting, JWT auth, routing, dan analytics pipeline.</div>
+          <div class="pfoot">
+            <div class="pstack"><span class="ps">Node.js</span><span class="ps">Redis</span><span class="ps">Kafka</span></div>
+            <a href="#" class="plink">↗</a>
           </div>
         </div>
       </div>
-      <div class="project-card fade-up" data-cat="web">
-        <div class="project-thumb">
-          <div class="project-thumb-inner">📊</div>
-          <div class="project-thumb-overlay">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="project-cat">Web · SaaS</div>
-          <div class="project-name">OpsMatrix — Enterprise Analytics SaaS</div>
-          <div class="project-desc">Multi-tenant SaaS analytics platform with real-time data visualization, custom report builder, and webhook integrations.</div>
-          <div class="project-footer">
-            <div class="project-stack">
-              <span class="stack-tag">Next.js</span>
-              <span class="stack-tag">Laravel</span>
-              <span class="stack-tag">TimescaleDB</span>
-            </div>
-            <a href="#" class="project-link">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
+      <div class="pcard reveal" data-c="web">
+        <div class="pthumb"><div class="pthumb-em">📊</div><div class="pthumb-ov">↗</div></div>
+        <div class="pinfo">
+          <div class="pcat">Web · SaaS</div>
+          <div class="pname">OpsMatrix — Enterprise Analytics SaaS</div>
+          <div class="pdesc">Multi-tenant SaaS analytics platform dengan real-time data visualization dan custom report builder.</div>
+          <div class="pfoot">
+            <div class="pstack"><span class="ps">Next.js</span><span class="ps">Laravel</span><span class="ps">TimescaleDB</span></div>
+            <a href="#" class="plink">↗</a>
           </div>
         </div>
       </div>
-      <div class="project-card fade-up" data-cat="mobile">
-        <div class="project-thumb">
-          <div class="project-thumb-inner">🏥</div>
-          <div class="project-thumb-overlay">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="project-cat">Mobile · Health-Tech</div>
-          <div class="project-name">MediTrack — Patient Management App</div>
-          <div class="project-desc">Healthcare app for clinic management — patient records, appointment scheduling, and encrypted health data storage.</div>
-          <div class="project-footer">
-            <div class="project-stack">
-              <span class="stack-tag">Flutter</span>
-              <span class="stack-tag">Laravel</span>
-              <span class="stack-tag">MySQL</span>
-            </div>
-            <a href="#" class="project-link">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
+      <div class="pcard reveal" data-c="mobile">
+        <div class="pthumb"><div class="pthumb-em">🏥</div><div class="pthumb-ov">↗</div></div>
+        <div class="pinfo">
+          <div class="pcat">Mobile · Health-Tech</div>
+          <div class="pname">MediTrack — Patient Management App</div>
+          <div class="pdesc">Aplikasi klinik — rekam medis pasien, penjadwalan appointment, dan penyimpanan data kesehatan terenkripsi.</div>
+          <div class="pfoot">
+            <div class="pstack"><span class="ps">Flutter</span><span class="ps">Laravel</span><span class="ps">MySQL</span></div>
+            <a href="#" class="plink">↗</a>
           </div>
         </div>
       </div>
-      <div class="project-card fade-up" data-cat="api">
-        <div class="project-thumb">
-          <div class="project-thumb-inner">🔐</div>
-          <div class="project-thumb-overlay">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="project-cat">API · Security</div>
-          <div class="project-name">AuthNest — SSO & Identity Service</div>
-          <div class="project-desc">Single sign-on identity provider with OAuth2, PKCE flow, multi-factor authentication, and enterprise LDAP integration.</div>
-          <div class="project-footer">
-            <div class="project-stack">
-              <span class="stack-tag">Node.js</span>
-              <span class="stack-tag">OAuth2</span>
-              <span class="stack-tag">PostgreSQL</span>
-            </div>
-            <a href="#" class="project-link">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
+      <div class="pcard reveal" data-c="api">
+        <div class="pthumb"><div class="pthumb-em">🔐</div><div class="pthumb-ov">↗</div></div>
+        <div class="pinfo">
+          <div class="pcat">API · Security</div>
+          <div class="pname">AuthNest — SSO &amp; Identity Service</div>
+          <div class="pdesc">Identity provider SSO dengan OAuth2, PKCE flow, multi-factor authentication, dan integrasi enterprise LDAP.</div>
+          <div class="pfoot">
+            <div class="pstack"><span class="ps">Node.js</span><span class="ps">OAuth2</span><span class="ps">PostgreSQL</span></div>
+            <a href="#" class="plink">↗</a>
           </div>
         </div>
       </div>
@@ -1079,89 +985,68 @@
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="hr"></div>
 
-<!-- CONTACT -->
+<!-- ══════════════════ CONTACT ══════════════════ -->
 <section id="contact">
-  <div class="container">
+  <div class="wrap">
     <div class="contact-grid">
-      <div class="contact-info fade-up">
-        <span class="tag">Let's Build Together</span>
-        <h2 style="margin-top:1rem">Start your<br>next project<br>with us.</h2>
-        <p style="margin-top:1rem">Have a system to architect, a product to build, or existing code that needs surgery? We'd like to hear about it.</p>
-        <div class="contact-items">
-          <div class="contact-item">
-            <div class="contact-item-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div>
-              <div class="contact-item-label">Email</div>
-              <div class="contact-item-val">hello@hexaverse.studio</div>
-            </div>
+      <div class="cinfo reveal">
+        <span class="chip">Let's Build Together</span>
+        <h2>Start your<br>next project<br>with us.</h2>
+        <p>Punya sistem yang ingin dirancang, produk yang ingin dibangun, atau kode existing yang butuh perbaikan? Kami ingin mendengarnya.</p>
+        <div class="citems">
+          <div class="citem">
+            <div class="cico">✉️</div>
+            <div><div class="cil">Email</div><div class="civ">hello@hexaverse.studio</div></div>
           </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div>
-              <div class="contact-item-label">Location</div>
-              <div class="contact-item-val">Banyuwangi, East Java, Indonesia</div>
-            </div>
+          <div class="citem">
+            <div class="cico">📍</div>
+            <div><div class="cil">Location</div><div class="civ">Banyuwangi, East Java, Indonesia</div></div>
           </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <div>
-              <div class="contact-item-label">Response Time</div>
-              <div class="contact-item-val">Within 24 hours</div>
-            </div>
+          <div class="citem">
+            <div class="cico">⏱️</div>
+            <div><div class="cil">Response Time</div><div class="civ">Within 24 hours</div></div>
           </div>
         </div>
       </div>
-      <div class="contact-form fade-up">
-        <div class="form-group">
-          <label class="form-label">Your Name</label>
-          <input type="text" class="form-input" placeholder="John Doe" />
+      <div class="cform reveal">
+        <div class="fg">
+          <label class="fl">Your Name</label>
+          <input type="text" class="fi" placeholder="John Doe" />
         </div>
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input type="email" class="form-input" placeholder="john@company.com" />
+        <div class="fg">
+          <label class="fl">Email Address</label>
+          <input type="email" class="fi" placeholder="john@company.com" />
         </div>
-        <div class="form-group">
-          <label class="form-label">Project Type</label>
-          <input type="text" class="form-input" placeholder="Web App / Mobile / Architecture Review" />
+        <div class="fg">
+          <label class="fl">Project Type</label>
+          <input type="text" class="fi" placeholder="Web App / Mobile / Architecture Review" />
         </div>
-        <div class="form-group">
-          <label class="form-label">Tell us about your project</label>
-          <textarea class="form-textarea" placeholder="Describe what you're building, your current challenges, and your timeline..."></textarea>
+        <div class="fg">
+          <label class="fl">Tell us about your project</label>
+          <textarea class="ft" placeholder="Ceritakan apa yang sedang Anda bangun, tantangan saat ini, dan timeline Anda..."></textarea>
         </div>
-        <button class="btn-primary" style="width:100%; padding:.85rem; font-size:.8rem">Send Message →</button>
+        <button class="btn-fill" style="width:100%;padding:.85rem;font-size:.9rem">Kirim Pesan →</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="logo">
-          <div class="logo-hex">
-            <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 2L27 9V21L15 28L3 21V9L15 2Z" stroke="#8B5CF6" stroke-width="1.5" fill="none"/>
-              <path d="M15 8L21 11.5V18.5L15 22L9 18.5V11.5L15 8Z" fill="#6D28D9" opacity="0.7"/>
-              <circle cx="15" cy="15" r="2" fill="#8B5CF6"/>
-            </svg>
-          </div>
-          HEXAVERSE <span>STUDIO</span>
-        </div>
-        <p>Engineering digital infrastructure that performs, scales, and endures. Based in Indonesia, delivering globally.</p>
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="#" class="nav-logo">
+          <img src="/mnt/user-data/uploads/hexaverse_logos.png" alt="Hexaverse Studio Logo" />
+          HEXAVERSE <span class="txt-blue">STUDIO</span>
+        </a>
+        <p>Merekayasa infrastruktur digital yang berperforma, skalabel, dan bertahan lama. Berbasis di Indonesia, melayani global.</p>
       </div>
       <div>
-        <div class="footer-col-title">Navigation</div>
-        <div class="footer-links">
+        <div class="ft-ch">Navigation</div>
+        <div class="ft-links">
           <a href="#why">Why Hexaverse</a>
           <a href="#founder">The Founder</a>
           <a href="#services">Services</a>
@@ -1170,8 +1055,8 @@
         </div>
       </div>
       <div>
-        <div class="footer-col-title">Services</div>
-        <div class="footer-links">
+        <div class="ft-ch">Services</div>
+        <div class="ft-links">
           <a href="#">Software Architecture</a>
           <a href="#">Web Development</a>
           <a href="#">Mobile Apps</a>
@@ -1180,8 +1065,8 @@
         </div>
       </div>
       <div>
-        <div class="footer-col-title">Connect</div>
-        <div class="footer-links">
+        <div class="ft-ch">Connect</div>
+        <div class="ft-links">
           <a href="#">GitHub</a>
           <a href="#">LinkedIn</a>
           <a href="#">Twitter / X</a>
@@ -1189,17 +1074,17 @@
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="ft-bot">
       <span>© 2025 HEXAVERSE STUDIO. All rights reserved.</span>
-      <span style="color:var(--text-dim)">Built with precision. Shipped with purpose.</span>
-      <div class="footer-socials">
-        <a href="#" class="social-btn">
+      <span style="color:var(--dim)">Built with precision. Shipped with purpose.</span>
+      <div class="ft-soc">
+        <a href="#" class="soc">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
         </a>
-        <a href="#" class="social-btn">
+        <a href="#" class="soc">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         </a>
-        <a href="#" class="social-btn">
+        <a href="#" class="soc">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
       </div>
@@ -1208,66 +1093,41 @@
 </footer>
 
 <script>
-  // ── THEME TOGGLE ──────────────────────────────────────
+  /* ── THEME ── */
   const html = document.documentElement;
-  const themeBtn = document.getElementById('theme-btn');
-  const sunIcon = document.getElementById('sun-icon');
-  const moonIcon = document.getElementById('moon-icon');
-  let isDark = true;
-
-  themeBtn.addEventListener('click', () => {
-    isDark = !isDark;
-    html.setAttribute('data-theme', isDark ? 'dark' : 'light');
-    sunIcon.style.display = isDark ? 'block' : 'none';
-    moonIcon.style.display = isDark ? 'none' : 'block';
+  const tbtn = document.getElementById('tbtn');
+  let dark = true;
+  tbtn.addEventListener('click', () => {
+    dark = !dark;
+    html.setAttribute('data-theme', dark ? 'dark' : 'light');
+    tbtn.textContent = dark ? '☀️' : '🌙';
   });
 
-  // ── MOBILE NAV ────────────────────────────────────────
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileNav = document.getElementById('mobile-nav');
-
-  mobileMenuBtn.addEventListener('click', () => {
-    mobileNav.classList.toggle('open');
-  });
-
-  function closeMobileNav() {
-    mobileNav.classList.remove('open');
-  }
-
-  // ── SCROLL REVEAL ─────────────────────────────────────
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  // ── PROJECT FILTER ────────────────────────────────────
-  function filterProjects(cat, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    document.querySelectorAll('.project-card').forEach(card => {
-      if (cat === 'all' || card.dataset.cat === cat) {
-        card.style.display = 'flex';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  }
-
-  // ── NAV SCROLL EFFECT ─────────────────────────────────
+  /* ── NAV SCROLL ── */
   window.addEventListener('scroll', () => {
-    const nav = document.getElementById('nav');
-    if (window.scrollY > 50) {
-      nav.style.boxShadow = '0 4px 32px rgba(0,0,0,.3)';
-    } else {
-      nav.style.boxShadow = 'none';
-    }
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
   });
+
+  /* ── MOBILE NAV ── */
+  document.getElementById('hmbtn').addEventListener('click', () => {
+    document.getElementById('mob').classList.toggle('open');
+  });
+  function closeMob() { document.getElementById('mob').classList.remove('open'); }
+
+  /* ── SCROLL REVEAL ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ── PROJECT FILTER ── */
+  function filterP(cat, btn) {
+    document.querySelectorAll('.pfbtn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    document.querySelectorAll('.pcard').forEach(c => {
+      c.style.display = (cat === 'all' || c.dataset.c === cat) ? 'flex' : 'none';
+    });
+  }
 </script>
 </body>
 </html>
