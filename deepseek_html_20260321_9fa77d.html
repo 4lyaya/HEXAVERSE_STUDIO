@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HEXAVERSE STUDIO — Portfolio of Engineered Systems</title>
+  <!-- Tailwind CSS + Fonts + Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    * {
+      transition: background-color 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), border-color 0.2s ease, color 0.2s ease, transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.5s ease;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #e2e8f0; }
+    .dark ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 12px; }
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: all 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+    }
+    .reveal-on-scroll.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .soft-card {
+      border-radius: 2rem;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    .hover-lift:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.12);
+    }
+    .dark .hover-lift:hover {
+      box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.5);
+    }
+    .modal-backdrop {
+      backdrop-filter: blur(8px);
+    }
+    .project-card {
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    .bg-indigo-soft {
+      background-color: rgba(79, 70, 229, 0.08);
+    }
+    .dark .bg-indigo-soft {
+      background-color: rgba(99, 102, 241, 0.12);
+    }
+    /* image overlay gradient for better text contrast */
+    .card-img-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+    }
+    .dark .card-img-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          borderRadius: { '3xl': '2rem' },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out',
+            'scale-in': 'scaleIn 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1)',
+          },
+          keyframes: {
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            scaleIn: { '0%': { transform: 'scale(0.95)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } },
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+
+  <!-- NAVIGATION -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
+    <nav class="max-w-7xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-xl bg-indigo-600 dark:bg-indigo-500 flex items-center justify-center shadow-sm">
+          <span class="text-white font-bold text-lg tracking-tight">◈</span>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">HEXAVERSE</span>
+        <span class="text-xs font-mono text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded-full">STUDIO</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#tools" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Frameworks</a>
+        <a href="#founder" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Founder</a>
+        <a href="#services" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Services</a>
+        <a href="#projects" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Projects</a>
+        <a href="#contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Contact</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="themeToggle" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+          <i data-lucide="sun" class="w-4 h-4 dark:hidden"></i>
+          <i data-lucide="moon" class="w-4 h-4 hidden dark:block"></i>
+        </button>
+        <button id="mobileMenuBtn" class="md:hidden w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </nav>
+    <div id="mobileDrawer" class="fixed inset-0 z-40 bg-white dark:bg-slate-950 backdrop-blur-xl transform translate-x-full transition-transform duration-300 md:hidden">
+      <div class="flex flex-col p-8 pt-24 gap-6 text-xl font-semibold">
+        <a href="#tools" class="py-2 border-b border-slate-200 dark:border-slate-800" onclick="closeDrawer()">Frameworks</a>
+        <a href="#founder" class="py-2 border-b border-slate-200 dark:border-slate-800" onclick="closeDrawer()">Founder</a>
+        <a href="#services" class="py-2 border-b border-slate-200 dark:border-slate-800" onclick="closeDrawer()">Services</a>
+        <a href="#projects" class="py-2 border-b border-slate-200 dark:border-slate-800" onclick="closeDrawer()">Projects</a>
+        <a href="#contact" class="py-2" onclick="closeDrawer()">Contact</a>
+      </div>
+      <button class="absolute top-6 right-6 p-2" onclick="closeDrawer()"><i data-lucide="x" class="w-6 h-6"></i></button>
+    </div>
+  </header>
+
+  <main class="pt-24 md:pt-28">
+    <!-- HERO SECTION with refined UI -->
+    <section class="max-w-7xl mx-auto px-6 md:px-10 py-12 md:py-20 reveal-on-scroll">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 text-xs font-mono">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> ENGINEERING FIRST
+          </div>
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.2]">Architecting Scalable <br/><span class="text-indigo-600 dark:text-indigo-400">Digital Ecosystems</span></h1>
+          <p class="text-lg text-slate-600 dark:text-slate-400 max-w-lg">High-performance engineering, modular architectures, and sustainable codebases. We build systems that endure, scale, and evolve.</p>
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#contact" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white rounded-2xl font-semibold transition shadow-md">Start a Project</a>
+            <a href="#projects" class="px-6 py-3 border border-slate-300 dark:border-slate-700 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition font-medium">Explore Projects →</a>
+          </div>
+          <div class="flex flex-wrap gap-8 pt-8 border-t border-slate-200 dark:border-slate-800 mt-6">
+            <div><span class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">50+</span><p class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Projects</p></div>
+            <div><span class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">98%</span><p class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Satisfaction</p></div>
+            <div><span class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">5yr</span><p class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Experience</p></div>
+          </div>
+        </div>
+        <div class="relative flex justify-center">
+          <div class="w-80 h-80 bg-indigo-50 dark:bg-indigo-950/30 rounded-[3rem] flex items-center justify-center border border-indigo-200 dark:border-indigo-800 shadow-soft"><div class="text-center"><div class="text-7xl mb-2">◈</div><div class="font-mono text-sm text-indigo-600 dark:text-indigo-400">hexaverse.core</div><div class="text-xs text-slate-500 dark:text-slate-400 mt-2">performance oriented</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOLS SECTION -->
+    <section id="tools" class="max-w-7xl mx-auto px-6 md:px-10 py-20 reveal-on-scroll">
+      <div class="text-center mb-12"><span class="text-indigo-600 dark:text-indigo-400 font-mono text-sm">◈ INNOVATION STACK</span><h2 class="text-3xl md:text-4xl font-bold mt-2">Proprietary Frameworks</h2><p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mt-3">Engineered in-house to push boundaries of modularity and speed.</p></div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 soft-card hover-lift"><div class="w-12 h-12 rounded-2xl bg-indigo-100 dark:bg-indigo-950/60 flex items-center justify-center mb-4"><span class="text-2xl">⚡</span></div><h3 class="text-xl font-bold">Axero.js</h3><p class="text-sm text-slate-500 dark:text-slate-400">Modular full-stack JS framework with real-time sync.</p></div>
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 soft-card hover-lift"><div class="w-12 h-12 rounded-2xl bg-indigo-100 dark:bg-indigo-950/60 flex items-center justify-center mb-4"><span class="text-2xl">🐘</span></div><h3 class="text-xl font-bold">Hexa PHP</h3><p class="text-sm text-slate-500 dark:text-slate-400">Enterprise PHP with DDD, strict typing & service containers.</p></div>
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 soft-card hover-lift"><div class="w-12 h-12 rounded-2xl bg-indigo-100 dark:bg-indigo-950/60 flex items-center justify-center mb-4"><span class="text-2xl">🐍</span></div><h3 class="text-xl font-bold">Gspark</h3><p class="text-sm text-slate-500 dark:text-slate-400">Python rapid automation & data pipelines.</p></div>
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 soft-card hover-lift"><div class="w-12 h-12 rounded-2xl bg-indigo-100 dark:bg-indigo-950/60 flex items-center justify-center mb-4"><span class="text-2xl">🛠️</span></div><h3 class="text-xl font-bold">Hexatools</h3><p class="text-sm text-slate-500 dark:text-slate-400">CLI toolkit for scaffolding, automation & audits.</p></div>
+      </div>
+    </section>
+
+    <!-- FOUNDER SECTION -->
+    <section id="founder" class="max-w-7xl mx-auto px-6 md:px-10 py-20 bg-slate-50 dark:bg-slate-900/40 rounded-[3rem] my-8 reveal-on-scroll">
+      <div class="grid md:grid-cols-2 gap-12 items-center"><div class="order-2 md:order-1"><span class="text-indigo-600 dark:text-indigo-400 font-mono text-sm">LEAD ARCHITECT</span><h2 class="text-4xl font-bold mt-2">Akmal Raditya W.</h2><p class="text-slate-600 dark:text-slate-300 text-lg mt-3">Full-stack Developer & Software Architect</p><div class="h-1 w-12 bg-indigo-500 my-5 rounded-full"></div><p class="text-slate-600 dark:text-slate-400">5+ years architecting fintech, SaaS, enterprise platforms. Obsessed with Clean Architecture, SOLID, and modular design.</p></div><div class="order-1 md:order-2 flex justify-center"><div class="w-64 h-64 rounded-full bg-gradient-to-tr from-indigo-100 to-white dark:from-indigo-950 dark:to-slate-800 flex items-center justify-center shadow-xl"><span class="text-7xl">👨‍💻</span></div></div></div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="max-w-7xl mx-auto px-6 md:px-10 py-20 reveal-on-scroll">
+      <div class="text-center mb-12"><span class="text-indigo-600 dark:text-indigo-400 font-mono text-sm">CORE EXPERTISE</span><h2 class="text-3xl md:text-4xl font-bold mt-2">What We Deliver</h2></div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-7 soft-card hover-lift"><i data-lucide="layers" class="w-10 h-10 text-indigo-600 dark:text-indigo-400 mb-4"></i><h3 class="text-xl font-bold">Software Architecture</h3><p class="text-slate-500 dark:text-slate-400">DDD, hexagonal, event-driven systems.</p></div>
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-7 soft-card hover-lift"><i data-lucide="globe" class="w-10 h-10 text-indigo-600 dark:text-indigo-400 mb-4"></i><h3 class="text-xl font-bold">Web Development</h3><p class="text-slate-500 dark:text-slate-400">Laravel, Node.js, Next.js, scalable APIs.</p></div>
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-7 soft-card hover-lift"><i data-lucide="smartphone" class="w-10 h-10 text-indigo-600 dark:text-indigo-400 mb-4"></i><h3 class="text-xl font-bold">Mobile Apps</h3><p class="text-slate-500 dark:text-slate-400">React Native, Flutter, cross-platform excellence.</p></div>
+      </div>
+    </section>
+
+    <!-- ⭐ PROJECTS SECTION WITH UNSPLASH IMAGES + 10 CARDS + MODAL DETAILS -->
+    <section id="projects" class="max-w-7xl mx-auto px-6 md:px-10 py-20 bg-slate-50 dark:bg-slate-900/20 rounded-[3rem] my-6 reveal-on-scroll">
+      <div class="text-center mb-12">
+        <span class="text-indigo-600 dark:text-indigo-400 font-mono text-sm">◈ RECENT ENGINEERING</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2">Selected Project Portfolio</h2>
+        <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">10 real-world products — web & mobile — each built with modular architecture and high performance. Click any card for full case study.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid"></div>
+    </section>
+
+    <!-- CONTACT SECTION refined -->
+    <section id="contact" class="max-w-7xl mx-auto px-6 md:px-10 py-20 reveal-on-scroll">
+      <div class="grid md:grid-cols-2 gap-12 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 md:p-10 shadow-soft">
+        <div><span class="text-indigo-600 dark:text-indigo-400 font-mono text-sm">START A CONVERSATION</span><h2 class="text-3xl font-bold mt-2">Let's engineer your next system.</h2><p class="text-slate-600 dark:text-slate-400 mt-4">Ready to build something extraordinary? Reach out.</p><div class="mt-8 space-y-4"><div class="flex gap-4"><i data-lucide="mail" class="w-5 h-5 text-indigo-500"></i><span>hello@hexaverse.studio</span></div><div class="flex gap-4"><i data-lucide="map-pin" class="w-5 h-5 text-indigo-500"></i><span>Banyuwangi, Indonesia</span></div><div class="flex gap-4"><i data-lucide="clock" class="w-5 h-5 text-indigo-500"></i><span>Response within 24h</span></div></div></div>
+        <form class="space-y-5" onsubmit="event.preventDefault(); alert('✨ Message received. Our team will contact you within 24 hours.');"><input type="text" placeholder="Full name" class="w-full p-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"><input type="email" placeholder="Email" class="w-full p-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"><textarea rows="3" placeholder="Tell us about your project..." class="w-full p-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"></textarea><button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-semibold transition">Send Message →</button></form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-12 mt-8">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500 dark:text-slate-400"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-md bg-indigo-600 flex items-center justify-center"><span class="text-white text-xs">◈</span></div><span class="font-bold text-slate-800 dark:text-white">HEXAVERSE STUDIO</span><span>© 2025</span></div><div class="flex gap-6"><a href="#" class="hover:text-indigo-600">GitHub</a><a href="#" class="hover:text-indigo-600">LinkedIn</a><a href="#" class="hover:text-indigo-600">X</a></div><div class="font-mono text-xs">Architecting infinity • built with precision</div></div>
+  </footer>
+
+  <!-- MODAL STRUCTURE -->
+  <div id="projectModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-all duration-300">
+    <div class="absolute inset-0 bg-black/70 modal-backdrop" id="modalBackdrop"></div>
+    <div class="relative bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl transform scale-95 transition-all duration-300 p-6 md:p-8 border border-slate-200 dark:border-slate-700" id="modalContent">
+      <button id="closeModalBtn" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></button>
+      <div id="modalDynamic"></div>
+    </div>
+  </div>
+
+  <script>
+    // 10 PROJECTS DATA with Unsplash images (professional, tech/business related)
+    const projectsData = [
+      { id: 1, name: "NexaPay", type: "web", category: "Fintech", desc: "Multi-tenant digital banking platform with real-time transactions, RBAC, and compliance modules.", tech: ["Laravel", "Next.js", "PostgreSQL", "Redis"], fullDesc: "NexaPay processes over 500k daily transactions with sub-second latency. Built with Hexagonal Architecture, featuring automated fraud detection and audit logs.", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=400&fit=crop", bgColor: "" },
+      { id: 2, name: "Kiramat", type: "mobile", category: "E-Commerce", desc: "Cross-platform marketplace for Indonesian UMKM, offline mode, OTP auth, payment gateway.", tech: ["React Native", "Node.js", "MongoDB"], fullDesc: "Served 200k+ users with seamless offline-first experience, integrated with Midtrans and real-time inventory sync.", img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop" },
+      { id: 3, name: "FluxCore", type: "web", category: "API Gateway", desc: "High-throughput gateway handling 2M+ daily requests, rate limiting, analytics pipeline.", tech: ["Node.js", "Redis", "Kafka", "Docker"], fullDesc: "FluxCore reduced latency by 40% for enterprise clients, featuring JWT auth, dynamic routing, and real-time monitoring dashboards.", img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop" },
+      { id: 4, name: "OpsMatrix", type: "web", category: "SaaS Analytics", desc: "Enterprise analytics SaaS with custom report builder and real-time visualizations.", tech: ["Next.js", "Laravel", "TimescaleDB"], fullDesc: "Used by 50+ enterprises to visualize petabytes of operational data, with embedded BI tools and role-based dashboards.", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" },
+      { id: 5, name: "MediTrack", type: "mobile", category: "HealthTech", desc: "Clinic management app: medical records, appointments, encrypted health data.", tech: ["Flutter", "Laravel", "MySQL"], fullDesc: "Compliant with Indonesian health data regulations, supports 100+ clinics with offline-capable forms and push notifications.", img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop" },
+      { id: 6, name: "AuthNest", type: "web", category: "Security", desc: "SSO identity provider with OAuth2, MFA, and enterprise LDAP integration.", tech: ["Node.js", "OAuth2", "PostgreSQL"], fullDesc: "Deployed in 15 enterprise orgs, providing zero-trust authentication, SAML bridge, and audit trails.", img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop" },
+      { id: 7, name: "LogiTrack", type: "mobile", category: "Logistics", desc: "Real-time fleet management & delivery tracking for logistics companies.", tech: ["React Native", "Node.js", "Socket.io"], fullDesc: "Optimized route planning reduced fuel costs by 18%, live driver tracking and proof-of-delivery system.", img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop" },
+      { id: 8, name: "EduLabs", type: "web", category: "EdTech", desc: "Interactive learning platform with live classes, gamification, and assessments.", tech: ["Next.js", "Laravel", "WebRTC"], fullDesc: "Scaled to 10k concurrent users during peak hours, integrated virtual classrooms and AI-based quiz recommendations.", img: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=600&h=400&fit=crop" },
+      { id: 9, name: "GreenCharge", type: "mobile", category: "IoT/EV", desc: "EV charging station finder & payment app with real-time station availability.", tech: ["Flutter", "Node.js", "PostGIS"], fullDesc: "Mapped 500+ stations across Indonesia, smart reservation system and RFID authentication for fast charging.", img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&h=400&fit=crop" },
+      { id: 10, name: "CodeRaise", type: "web", category: "DevTool", desc: "Developer portfolio & code review platform with CI/CD badges and metrics.", tech: ["Next.js", "Tailwind", "GraphQL"], fullDesc: "Community-driven platform used by 8k developers to showcase projects and get peer reviews with actionable insights.", img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop" }
+    ];
+
+    function renderProjects() {
+      const grid = document.getElementById('projectsGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      projectsData.forEach(proj => {
+        const card = document.createElement('div');
+        card.className = 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden soft-card hover-lift transition-all duration-300 project-card flex flex-col';
+        card.innerHTML = `
+          <div class="relative h-48 overflow-hidden">
+            <img src="${proj.img}" alt="${proj.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" style="transition: transform 0.5s ease;">
+            <div class="absolute inset-0 card-img-overlay"></div>
+            <div class="absolute top-3 right-3 z-10">
+              <span class="text-xs font-mono px-2 py-1 rounded-full bg-white/90 dark:bg-slate-900/90 text-indigo-700 dark:text-indigo-300 shadow-sm backdrop-blur-sm">${proj.type === 'web' ? '🌐 WEB' : '📱 MOBILE'}</span>
+            </div>
+            <div class="absolute bottom-3 left-4 z-10">
+              <span class="text-2xl drop-shadow-md">${proj.id === 1 ? '🏦' : proj.id === 2 ? '🛒' : proj.id === 3 ? '⚡' : proj.id === 4 ? '📊' : proj.id === 5 ? '🏥' : proj.id === 6 ? '🔐' : proj.id === 7 ? '🚚' : proj.id === 8 ? '🎓' : proj.id === 9 ? '🔋' : '💻'}</span>
+            </div>
+          </div>
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold">${proj.name}</h3>
+            <p class="text-indigo-600 dark:text-indigo-400 text-xs font-mono mt-0.5">${proj.category}</p>
+            <p class="text-slate-600 dark:text-slate-300 text-sm mt-3 line-clamp-2">${proj.desc}</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              ${proj.tech.slice(0,3).map(t => `<span class="text-[11px] font-mono bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-full">${t}</span>`).join('')}
+            </div>
+            <button class="mt-5 text-indigo-600 dark:text-indigo-400 text-sm font-semibold flex items-center gap-1 group w-fit">View details <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-1 transition"></i></button>
+          </div>
+        `;
+        const btn = card.querySelector('button');
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openModal(proj);
+        });
+        grid.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function openModal(project) {
+      const modal = document.getElementById('projectModal');
+      const modalDynamic = document.getElementById('modalDynamic');
+      modalDynamic.innerHTML = `
+        <div class="relative h-52 rounded-2xl overflow-hidden mb-6">
+          <img src="${project.img}" alt="${project.name}" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div class="absolute bottom-4 left-5 flex items-center gap-3">
+            <span class="text-4xl drop-shadow-lg">${project.id === 1 ? '🏦' : project.id === 2 ? '🛒' : project.id === 3 ? '⚡' : project.id === 4 ? '📊' : project.id === 5 ? '🏥' : project.id === 6 ? '🔐' : project.id === 7 ? '🚚' : project.id === 8 ? '🎓' : project.id === 9 ? '🔋' : '💻'}</span>
+            <div><h2 class="text-2xl md:text-3xl font-bold text-white">${project.name}</h2><span class="text-sm font-mono text-indigo-200">${project.type === 'web' ? 'Web Platform' : 'Mobile Application'}</span></div>
+          </div>
+        </div>
+        <div class="mb-4"><span class="text-xs bg-indigo-soft px-3 py-1 rounded-full">${project.category}</span></div>
+        <p class="text-slate-700 dark:text-slate-300 leading-relaxed">${project.fullDesc}</p>
+        <div class="mt-6"><h4 class="font-bold mb-2">Technology Stack</h4><div class="flex flex-wrap gap-2">${project.tech.map(t => `<span class="bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full text-sm font-mono">${t}</span>`).join('')}</div></div>
+        <div class="mt-6 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl"><p class="text-sm"><span class="font-bold">◈ Hexaverse Impact:</span> Engineered with modular architecture, 99.9% uptime, and full observability stack.</p></div>
+        <div class="mt-6 flex justify-end"><a href="#contact" class="px-5 py-2 bg-indigo-600 text-white rounded-xl text-sm font-semibold hover:bg-indigo-700 transition" onclick="closeModal()">Start similar project →</a></div>
+      `;
+      modal.classList.remove('opacity-0', 'invisible');
+      modal.classList.add('opacity-100', 'visible');
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('projectModal');
+      modal.classList.add('opacity-0', 'invisible');
+      modal.classList.remove('opacity-100', 'visible');
+      document.body.style.overflow = '';
+    }
+
+    function bindModalEvents() {
+      document.getElementById('modalBackdrop')?.addEventListener('click', closeModal);
+      document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+    }
+
+    function closeDrawer() { document.getElementById('mobileDrawer').classList.add('translate-x-full'); }
+    document.getElementById('mobileMenuBtn')?.addEventListener('click', () => document.getElementById('mobileDrawer').classList.remove('translate-x-full'));
+    document.querySelectorAll('#mobileDrawer a').forEach(a => a.addEventListener('click', closeDrawer));
+
+    // Dark mode
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) html.classList.add('dark');
+    themeToggle?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+      lucide.createIcons();
+    });
+
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
+    }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => revealObs.observe(el));
+
+    renderProjects();
+    bindModalEvents();
+    lucide.createIcons();
+  </script>
+  <style>
+    .reveal-on-scroll.revealed { opacity: 1; transform: translateY(0); }
+    .reveal-on-scroll { opacity: 0; transform: translateY(32px); transition: all 0.7s cubic-bezier(0.2, 0.95, 0.4, 1.1); }
+    #projectModal.visible { opacity: 1; visibility: visible; }
+    #projectModal.visible #modalContent { transform: scale(1); }
+    #modalContent { transform: scale(0.96); transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2); }
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .group:hover img { transform: scale(1.05); }
+  </style>
+</body>
+</html>
